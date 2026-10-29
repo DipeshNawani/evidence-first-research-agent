@@ -1,0 +1,57 @@
+{
+  "short_answer": "Could not gather sufficient evidence.",
+  "key_findings": [],
+  "comparison_table": null,
+  "assumptions": [
+    "Offline fixture run; these are authored examples, not current web research."
+  ],
+  "limitations": [
+    "Could not gather and synthesize verified evidence; no factual answer is established.",
+    "2 sub-question(s) lack two independent candidate domains.",
+    "Independent model judge unavailable or disabled; confidence uses a conservative default."
+  ],
+  "suggested_next_steps": [
+    "Clarify the scope or retry with working search providers."
+  ],
+  "user_question": "Compare vector databases for a startup RAG product when evidence is unavailable.",
+  "sources": [],
+  "confidence": {
+    "level": "low",
+    "score": 0.0733,
+    "factors": {
+      "independent_sources": 0.0,
+      "quality": 0.0,
+      "grounding": 0.0,
+      "agreement_proxy": 0.0,
+      "judge": 0.4,
+      "tool_health": 0.0,
+      "gap_coverage": 0.3333333333333333
+    }
+  },
+  "meta": {
+    "trace_id": "2b68333efde142f899e54d9ff1c71ca4",
+    "mode": "mock",
+    "latency_s": 0.0375,
+    "tool_calls": 8,
+    "tokens": 298,
+    "token_upper_bound_reserved": 5432,
+    "est_cost_usd": 0.0,
+    "models": [
+      "mock-extractive-v1"
+    ],
+    "plan_summary": "Compare vector databases for a startup RAG product when evidence is unavailable.",
+    "dropped_sources_count": 0,
+    "grounding_rate": 0.0,
+    "judge_score": null,
+    "tool_failure_rate": 1.0,
+    "partial": false,
+    "status": "insufficient_evidence",
+    "stage_latency_s": {
+      "understand": 0.000464,
+      "plan": 0.005539,
+      "execute": 0.023398,
+      "filter": 0.0031019999999999997,
+      "confidence": 0.001063
+    }
+  }
+}

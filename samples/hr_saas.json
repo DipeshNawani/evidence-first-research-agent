@@ -1,0 +1,147 @@
+{
+  "short_answer": "Low confidence; provisional evidence only. Darwinbox is positioned as an enterprise human capital management platform. Keka is positioned around HR and payroll software for businesses. HROne is positioned around unified HR operations software. Zimyo is positioned as an HR management software suite. greytHR is positioned around payroll and core HR workflows.",
+  "key_findings": [
+    {
+      "claim": "Darwinbox is positioned as an enterprise human capital management platform.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "Darwinbox is positioned as an enterprise human capital management platform.",
+      "verified": true
+    },
+    {
+      "claim": "Keka is positioned around HR and payroll software for businesses.",
+      "source_ids": [
+        "S2"
+      ],
+      "supporting_quote": "Keka is positioned around HR and payroll software for businesses.",
+      "verified": true
+    },
+    {
+      "claim": "HROne is positioned around unified HR operations software.",
+      "source_ids": [
+        "S3"
+      ],
+      "supporting_quote": "HROne is positioned around unified HR operations software.",
+      "verified": true
+    },
+    {
+      "claim": "Zimyo is positioned as an HR management software suite.",
+      "source_ids": [
+        "S4"
+      ],
+      "supporting_quote": "Zimyo is positioned as an HR management software suite.",
+      "verified": true
+    },
+    {
+      "claim": "greytHR is positioned around payroll and core HR workflows.",
+      "source_ids": [
+        "S5"
+      ],
+      "supporting_quote": "greytHR is positioned around payroll and core HR workflows.",
+      "verified": true
+    }
+  ],
+  "comparison_table": null,
+  "assumptions": [
+    "Authored mock corpus; observations are not independently researched facts.",
+    "Offline fixture run; these are authored examples, not current web research."
+  ],
+  "limitations": [
+    "Offline fixtures do not establish current rankings or real model quality."
+  ],
+  "suggested_next_steps": [
+    "Verify the cited primary sources and missing criteria before making a decision.",
+    "Repeat with live providers and benchmark against your workload."
+  ],
+  "user_question": "Find 5 Indian B2B SaaS startups in HR tech and summarize their positioning.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Darwinbox",
+      "url": "https://darwinbox.com/",
+      "domain": "darwinbox.com",
+      "quality_score": 0.6679,
+      "retrieved_at": "2026-10-29T16:33:54.392576Z",
+      "provenance": "fixture"
+    },
+    {
+      "id": "S2",
+      "title": "Keka",
+      "url": "https://www.keka.com/",
+      "domain": "www.keka.com",
+      "quality_score": 0.6436,
+      "retrieved_at": "2026-10-29T16:33:54.394032Z",
+      "provenance": "fixture"
+    },
+    {
+      "id": "S3",
+      "title": "HROne",
+      "url": "https://hrone.cloud/",
+      "domain": "hrone.cloud",
+      "quality_score": 0.6414,
+      "retrieved_at": "2026-10-29T16:33:54.395611Z",
+      "provenance": "fixture"
+    },
+    {
+      "id": "S4",
+      "title": "Zimyo",
+      "url": "https://www.zimyo.com/",
+      "domain": "www.zimyo.com",
+      "quality_score": 0.6386,
+      "retrieved_at": "2026-10-29T16:33:54.396888Z",
+      "provenance": "fixture"
+    },
+    {
+      "id": "S5",
+      "title": "greytHR",
+      "url": "https://www.greythr.com/",
+      "domain": "www.greythr.com",
+      "quality_score": 0.5943,
+      "retrieved_at": "2026-10-29T16:33:54.398198Z",
+      "provenance": "fixture"
+    }
+  ],
+  "confidence": {
+    "level": "low",
+    "score": 0.5,
+    "factors": {
+      "independent_sources": 1.0,
+      "quality": 0.63716,
+      "grounding": 1.0,
+      "agreement_proxy": 0.5,
+      "judge": 0.82,
+      "tool_health": 1.0,
+      "gap_coverage": 1.0
+    }
+  },
+  "meta": {
+    "trace_id": "e9147754ca1141f8ab078d7ba6e1b50c",
+    "mode": "mock",
+    "latency_s": 0.1399,
+    "tool_calls": 7,
+    "tokens": 2526,
+    "token_upper_bound_reserved": 23194,
+    "est_cost_usd": 0.0,
+    "models": [
+      "mock-extractive-v1"
+    ],
+    "plan_summary": "Find 5 Indian B2B SaaS startups in HR tech and summarize their positioning.",
+    "dropped_sources_count": 0,
+    "grounding_rate": 1.0,
+    "judge_score": 0.82,
+    "tool_failure_rate": 0.0,
+    "partial": false,
+    "status": "completed",
+    "stage_latency_s": {
+      "understand": 0.000469,
+      "plan": 0.00608,
+      "execute": 0.016574,
+      "filter": 0.101619,
+      "synthesize": 0.006478,
+      "verify": 0.001528,
+      "judge": 0.00258,
+      "confidence": 0.000869
+    }
+  }
+}

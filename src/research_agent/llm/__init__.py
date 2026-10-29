@@ -1,0 +1,1 @@
+"""Interchangeable structured-output providers."""

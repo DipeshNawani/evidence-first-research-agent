@@ -1,0 +1,146 @@
+{
+  "short_answer": "Low confidence; provisional evidence only. Weaviate supports hybrid keyword and vector search. Milvus offers distributed vector retrieval for larger workloads. Qdrant combines vector search with payload filtering.",
+  "key_findings": [
+    {
+      "claim": "Weaviate supports hybrid keyword and vector search.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "Weaviate supports hybrid keyword and vector search.",
+      "verified": true
+    },
+    {
+      "claim": "Milvus offers distributed vector retrieval for larger workloads.",
+      "source_ids": [
+        "S2"
+      ],
+      "supporting_quote": "Milvus offers distributed vector retrieval for larger workloads.",
+      "verified": true
+    },
+    {
+      "claim": "Qdrant combines vector search with payload filtering.",
+      "source_ids": [
+        "S3"
+      ],
+      "supporting_quote": "Qdrant combines vector search with payload filtering.",
+      "verified": true
+    }
+  ],
+  "comparison_table": {
+    "columns": [
+      "Supported observation"
+    ],
+    "rows": [
+      {
+        "item": "Weaviate",
+        "cells": [
+          "Weaviate supports hybrid keyword and vector search."
+        ],
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "item": "Milvus",
+        "cells": [
+          "Milvus offers distributed vector retrieval for larger workloads."
+        ],
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "item": "Qdrant",
+        "cells": [
+          "Qdrant combines vector search with payload filtering."
+        ],
+        "source_ids": [
+          "S3"
+        ]
+      }
+    ]
+  },
+  "assumptions": [
+    "Authored mock corpus; observations are not independently researched facts.",
+    "Offline fixture run; these are authored examples, not current web research."
+  ],
+  "limitations": [
+    "Offline fixtures do not establish current rankings or real model quality."
+  ],
+  "suggested_next_steps": [
+    "Verify the cited primary sources and missing criteria before making a decision.",
+    "Repeat with live providers and benchmark against your workload."
+  ],
+  "user_question": "Compare the top 3 open-source vector databases for a startup building RAG products.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Weaviate",
+      "url": "https://docs.weaviate.io/weaviate",
+      "domain": "docs.weaviate.io",
+      "quality_score": 0.8371,
+      "retrieved_at": "2026-10-29T16:33:52.614813Z",
+      "provenance": "fixture"
+    },
+    {
+      "id": "S2",
+      "title": "Milvus",
+      "url": "https://milvus.io/docs",
+      "domain": "milvus.io",
+      "quality_score": 0.74,
+      "retrieved_at": "2026-10-29T16:33:52.616568Z",
+      "provenance": "fixture"
+    },
+    {
+      "id": "S3",
+      "title": "Qdrant",
+      "url": "https://qdrant.tech/documentation",
+      "domain": "qdrant.tech",
+      "quality_score": 0.6729,
+      "retrieved_at": "2026-10-29T16:33:52.617681Z",
+      "provenance": "fixture"
+    }
+  ],
+  "confidence": {
+    "level": "low",
+    "score": 0.5,
+    "factors": {
+      "independent_sources": 1.0,
+      "quality": 0.75,
+      "grounding": 1.0,
+      "agreement_proxy": 0.5,
+      "judge": 0.82,
+      "tool_health": 1.0,
+      "gap_coverage": 1.0
+    }
+  },
+  "meta": {
+    "trace_id": "35ced655c8d0472da254d40c26d7118b",
+    "mode": "mock",
+    "latency_s": 0.1205,
+    "tool_calls": 5,
+    "tokens": 2000,
+    "token_upper_bound_reserved": 21265,
+    "est_cost_usd": 0.0,
+    "models": [
+      "mock-extractive-v1"
+    ],
+    "plan_summary": "Compare the top 3 open-source vector databases for a startup building RAG products.",
+    "dropped_sources_count": 0,
+    "grounding_rate": 1.0,
+    "judge_score": 0.82,
+    "tool_failure_rate": 0.0,
+    "partial": false,
+    "status": "completed",
+    "stage_latency_s": {
+      "understand": 0.002392,
+      "plan": 0.008707,
+      "execute": 0.018011,
+      "filter": 0.069207,
+      "synthesize": 0.008314,
+      "verify": 0.002005,
+      "judge": 0.005606,
+      "confidence": 0.001334
+    }
+  }
+}
