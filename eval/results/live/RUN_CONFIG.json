@@ -1,0 +1,14 @@
+{
+  "llm_provider": "nvidia",
+  "nvidia_model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "nvidia_judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "max_wall_seconds": 100.0,
+  "llm_timeout_seconds": 60.0,
+  "max_total_tokens": 32000,
+  "max_tool_calls": 16,
+  "max_pages": 6,
+  "max_rounds": 2,
+  "judge_enabled": true,
+  "judge_threshold": 0.72,
+  "notes": "Non-secret run settings. The recorded harness used NVIDIA; successful search-provider names are in tool_end events."
+}

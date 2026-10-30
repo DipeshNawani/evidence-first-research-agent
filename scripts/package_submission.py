@@ -7,10 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = [
     "README.md",
     "EVALUATION.md",
-    "DEMO_SCRIPT.md",
     "SUBMISSION.md",
     "VERIFICATION.md",
-    "REPO_TREE.txt",
     "pyproject.toml",
     "uv.lock",
     "pyrightconfig.json",
@@ -35,10 +33,6 @@ def submission_files() -> list[Path]:
 
 
 def package() -> Path:
-    inventory = [str(path.relative_to(ROOT)).replace("\\", "/") for path in submission_files()]
-    if "REPO_TREE.txt" not in inventory:
-        inventory.append("REPO_TREE.txt")
-    (ROOT / "REPO_TREE.txt").write_text("\n".join(sorted(inventory)) + "\n", encoding="utf-8")
     destination = ROOT / "dist/research-agent-submission.zip"
     destination.parent.mkdir(exist_ok=True)
     with ZipFile(destination, "w", ZIP_DEFLATED) as archive:

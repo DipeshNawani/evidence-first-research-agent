@@ -7,6 +7,88 @@ from statistics import mean
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def live_report() -> str:
+    """Keep live evidence separate and regenerate its actual denominators."""
+    path = ROOT / "eval/results/live/results.json"
+    if not path.exists():
+        return """## Live provider evidence
+
+Executed NVIDIA integration records are preserved under [the initial smoke check](eval/results/nvidia-smoke/REPORT.md) and [the follow-up checks](eval/results/approved-upgrade/REPORT.md). They include successful and partial runs. Full agent-versus-baseline metrics will be reported here only after the live harness writes its result file.
+"""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data["mode"] != "live":
+        raise ValueError("Live report requires explicitly live results")
+    agent = [row for row in data["rows"] if row["system"] == "agent"]
+    baseline = [row for row in data["rows"] if row["system"] == "baseline"]
+    substantive = [row for row in agent if row["metrics"]["source_count"] > 0]
+    providers: dict[str, int] = {}
+    for trace_path in sorted((path.parent / "traces").glob("*.jsonl")):
+        for line in trace_path.read_text(encoding="utf-8").splitlines():
+            event = json.loads(line)
+            fields = event.get("data", {})
+            provider = fields.get("search_provider")
+            if event["event"] == "tool_end" and fields.get("ok") and provider:
+                providers[provider] = providers.get(provider, 0) + 1
+    provider_text = (
+        ", ".join(
+            f"{name}: {count} successful search calls" for name, count in sorted(providers.items())
+        )
+        or "Successful provider names were not recorded in the available snapshots."
+    )
+    models = sorted({model for row in data["rows"] for model in row["answer"]["meta"]["models"]})
+    failures = [
+        f"- **{row['case']['id']} / {row['system']}**: "
+        + ", ".join(name for name, passed in row["metrics"]["checks"].items() if not passed)
+        + "."
+        for row in data["rows"]
+        if not row["metrics"]["behavior_pass"]
+    ]
+    grounding = mean(row["metrics"]["grounding_rate"] for row in substantive) if substantive else 0
+    verified = (
+        mean(row["metrics"]["verified_claim_fraction"] for row in substantive) if substantive else 0
+    )
+    return f"""## Executed live evaluation
+
+Executed at **{data["executed_at"]}**, separately from the authored mock evaluation. Sources: [raw live outputs](eval/results/live/results.json), [per-query summary](eval/results/live/summary.md), and [redacted trace snapshots](eval/results/live/traces/).
+
+- Evaluated **{len(agent)} normal-scenario queries** against both systems, producing **{len(data["rows"])} outputs**. Deterministic clarification/refusal cases are included in that denominator; synthetic fault scenarios are skipped: {", ".join(data["skipped_fixture_cases"])}.
+- Schema-valid final outputs: **{sum(row["metrics"]["schema_valid"] for row in data["rows"])}/{len(data["rows"])}**. This includes application recovery, not just raw model compliance.
+- Agent behavior checks: **{sum(row["metrics"]["behavior_pass"] for row in agent)}/{len(agent)}**; no-tool baseline: **{sum(row["metrics"]["behavior_pass"] for row in baseline)}/{len(baseline)}**.
+- Agent answers with cited findings: **{len(substantive)}/{len(agent)}**. Mean pre-removal quotation grounding on those answers: **{grounding:.1%}**; mean retained verified-claim fraction: **{verified:.1%}**.
+- Partial agent runs: **{sum(row["answer"]["meta"]["partial"] for row in agent)}/{len(agent)}**. Mean recorded agent latency across all cases: **{mean(row["metrics"]["latency_s"] for row in agent):.2f} s**; baseline: **{mean(row["metrics"]["latency_s"] for row in baseline):.2f} s**. Preflight exits make these averages smaller than a substantive research request.
+- Reported tokens: agent **{sum(row["metrics"]["tokens"] for row in agent):,}**, baseline **{sum(row["metrics"]["tokens"] for row in baseline):,}**. Timed-out calls may consume unreported tokens; these totals cover responses whose usage was returned.
+- Model IDs returned: {", ".join(f"`{model}`" for model in models)}.
+- Explicit search-provider evidence from successful tool events: **{provider_text}**.
+- Model cost remains unknown where rates are not configured; search and infrastructure costs are not measured. No zero-cost inference claim is made.
+
+### Live failed checks
+
+{chr(10).join(failures) if failures else "No machine behavior checks failed in this run."}
+
+### Live interpretation and human review
+
+The no-tool baseline cannot supply verified external citations by design. Behavior checks are narrow contracts, not accuracy scores. Quote matches do not establish semantic entailment, independence or factual correctness; the model judge is not ground truth. Review [the live assessment](eval/results/live/REVIEW.md) for per-case expected behavior, observed findings, missing criteria and output limitations. Historical integration failures remain under the earlier NVIDIA reports rather than being replaced by this run.
+
+### Reproduce the live harness
+
+Windows PowerShell:
+
+```powershell
+.\\.venv\\Scripts\\python.exe eval/run_eval.py --live
+.\\.venv\\Scripts\\python.exe scripts/write_eval_report.py
+```
+
+macOS / Linux:
+
+```bash
+.venv/bin/python eval/run_eval.py --live
+.venv/bin/python scripts/write_eval_report.py
+```
+
+Configure the selected provider locally before running. New runs overwrite the live harness outputs, so preserve evidence needed for a submission first.
+"""
+
+
 def write_report() -> None:
     results = json.loads((ROOT / "eval/results/mock/results.json").read_text(encoding="utf-8"))
     groups = {
@@ -25,9 +107,9 @@ def write_report() -> None:
         for row in agent
         if not row["metrics"]["behavior_pass"]
     ]
-    report = f"""# Evaluation: executed mock run
+    report = f"""# Evaluation: offline fixtures and live provider runs
 
-Executed at **{results["executed_at"]}**. Source of every number below: `eval/results/mock/results.json`. Reproduce with `python eval/run_eval.py --mock`; regenerate this narrative with `python scripts/write_eval_report.py`. Per-case metrics and full validated answers are committed. Nothing in this report is a live-model result.
+The offline evaluation was executed at **{results["executed_at"]}**. Its metrics below come from `eval/results/mock/results.json`; the separate **Executed live evaluation** section uses the live result files and traces. Per-case metrics and full validated answers are committed. The two modes are not combined into an accuracy score.
 
 ## Method and denominators
 
@@ -73,24 +155,17 @@ The offline pytest suite exercises actual cancellation, exponential retry classi
 
 ## Next improvements
 
-1. Run real providers on the four assignment examples; add a blind human rubric for balance, factual correctness, usefulness and missing criteria.
+1. Repeat the four live research examples across runs and add a blind human rubric for balance, factual correctness, usefulness and missing criteria.
 2. Replace or supplement the extractive mock with hand-authored expected-output variants for judge/revision tests; keep authored fixtures clearly separated from research results.
 3. Add cell-level evidence to richer comparison matrices and evaluate entailment rather than quotation presence alone.
 4. Expand ambiguous/unsafe/future-intent coverage beyond the deliberately small preflight rules; test contradictions and subtle injection attempts.
 5. Calibrate confidence and source heuristics with labeled data, audit domain independence and add real publication dates.
 6. Compare single-call, retrieval-only synthesis, and planned retrieval on the same evidence/task set; evaluate repeated runs and variance.
 
-## Live run handoff (not executed)
+{live_report()}
 
-No live-provider keys were available during the initial mock evaluation. A separate [NVIDIA live integration check](eval/results/nvidia-smoke/REPORT.md) now records one real answered query and its quality limitations; the full live agent-versus-baseline harness remains unexecuted. Set the provider and secrets in `.env`, then run:
-
-```sh
-python eval/run_eval.py --live
-```
-
-Live results go to `eval/results/live/`; fixture fault cases are explicitly skipped. Keep `results.json` and `summary.md`, record provider/model IDs and configured pricing rates, and add a dated human assessment here. Required fields to fill after execution: live case count, schema/grounding outcomes, factual errors found, rubric scores, actual token usage, model/search spend, stage latency distributions, baseline comparison, and model/provider failure cases. **No full live-benchmark metrics are claimed in this mock evaluation.** The separate smoke report preserves one real integration run without presenting it as a benchmark.
 """
-    (ROOT / "EVALUATION.md").write_text(report, encoding="utf-8")
+    (ROOT / "EVALUATION.md").write_text(report.rstrip() + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -1,71 +1,85 @@
 # Executed verification
 
-Verified on 29 October 2026 in the local Windows workspace, using Python 3.13.15. These are observed runs, not proposed checks. API tests used the offline fixture provider.
+Local execution used Windows and Python 3.13.15. The project targets Python 3.11+ syntax. Commands below include Windows PowerShell and macOS/Linux forms; the latter are compatibility instructions, not a claim that a separate macOS/Linux runtime was tested.
 
-## Installation and static checks
+## Offline checks and packaging
 
-- Created an isolated `.venv` and installed `.[dev]` successfully using uv.
-- Generated `uv.lock`, including the Windows-only GNU Make development dependency.
-- Copied the source into `tmp/fresh-clone` without an existing environment; `uv sync --project tmp/fresh-clone --extra dev --frozen` installed successfully.
-- Ran the independently installed copy's full pytest suite: **61 passed**, with one third-party Starlette/httpx deprecation warning.
-- `npx --yes pyright`: **0 errors, 0 warnings**.
-- `make lint` (the actual GNU Make target): Ruff check passed and all **59 Python files** were already formatted. Ignored temporary verification copies are excluded from source linting.
+- The current offline suite has **88 passing tests**, with one third-party Starlette/httpx deprecation warning.
+- Ruff check/format and Pyright passed in the recorded verification. The latest checks are rerun for this documentation/evidence update.
+- The mock harness retains **24 valid final outputs**, with **10/12** agent behavior cases and **4/12** baseline cases. Two known completeness failures remain visible in EVALUATION.md.
+- Initial installation used an isolated development environment and `uv.lock`. An independently installed clean source copy passed its original 61-test suite at that stage; that historical clean-install check predates the expanded 88-test suite.
+- Wheel inspection confirmed inclusion of the local homepage HTML, CSS and JavaScript. The source packager includes reviewer documentation and screenshots while excluding credentials, runtime state, caches, temporary directories and local recording notes.
 
-## Required runnable targets
+From the repository root, Windows PowerShell:
 
-The following actual targets succeeded. On this Windows host they were invoked through `.\.venv\Scripts\make.exe` with `PYTHON=.venv/Scripts/python.exe`:
-
-```text
-make test   -> 61 passed, one dependency deprecation warning
-make lint   -> check and format both pass
-make eval   -> 12 agent + 12 baseline outputs written
-make demo   -> visible plan, tool results, grounded findings, comparison and confidence
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts/tasks.py lint
+.\.venv\Scripts\python.exe scripts/package_submission.py
+npx --yes pyright
+uv build --wheel
 ```
 
-`make eval` reports **10/12** agent behavior cases and **4/12** baseline cases. The two mock completeness failures remain visible in the committed result set. Running an evaluation successfully does not imply every evaluated answer meets its rubric. See EVALUATION.md for interpretation and failed checks.
+macOS / Linux:
 
-The initial Windows demo exposed a cp1252 output error when Rich rendered Unicode. The CLI now configures its native Windows stdout/stderr as UTF-8; the same Make demo completed successfully after that correction.
-
-## Local HTTP smoke check
-
-Started an actual hidden uvicorn process bound to `127.0.0.1:18429`, made HTTP requests with PowerShell, and stopped that process in a `finally` block. Observed:
-
-```json
-{
-  "health": "ok",
-  "provider": "mock",
-  "findings": 3,
-  "trace_events": 38,
-  "trace_id": "53fa7cd03a544a0fba00517ff3720901"
-}
+```bash
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/tasks.py lint
+.venv/bin/python scripts/package_submission.py
+npx --yes pyright
+uv build --wheel
 ```
 
-This checked `GET /health`, `POST /research`, and `GET /traces/{trace_id}` over loopback HTTP, in addition to the in-process API tests. The server was stopped after verification.
+On either platform, `uv sync --extra dev --frozen` reproduces the locked development dependencies. Make is optional because the portable task runner invokes the same Python tasks. Uncertain or timed-out model attempts retain their token reservation; known successful usage settles to reported tokens.
 
-## Scope of the evidence
+## Browser and HTTP evidence
 
-No OpenAI, Anthropic or Tavily live keys were available. Provider request/response adapters were checked against official API documentation and exercised using httpx mock transports, including schema formatting and incomplete-response handling. **No live-model research quality, external search availability, live latency, real token consumption, or billable cost is asserted.** Python 3.11 syntax is supported and linted; a separate Python 3.11 runtime test has not been executed here.
+An actual mock server was started through the demo launcher. In an isolated Chrome session, the homepage rendered at 1280×900 and 390×844. The vector example displayed three cited findings. Offline search failure displayed insufficient evidence with zero sources. The plan/tool disclosure expanded, and both JSON and Markdown attachment links returned HTTP 200. Selected screenshots are committed under `docs/assets/`.
 
-The three sample JSON/Markdown pairs and their trace snapshots are generated by the executed mock evaluation. All costs and model-judge values in those fixtures are labeled synthetic/mock. The evaluation report is generated from the stored result JSON, so its measured numbers can be audited without relying on this narrative.
+A separate actual NVIDIA UI request completed in 29.2552 seconds with five findings, three sources and judge score 0.75, trace `aa0e306df6da40bf8a5c863217be008c`. The live screenshot, visible result text and trace are preserved separately from the six-case harness. Its in-memory export cache was cleared by a development-server reload during editing; the preserved evidence is the actual rendered output and persistent trace, not a reconstructed final JSON response.
 
-## NVIDIA provider follow-up
+Start a local offline server, Windows PowerShell:
 
-Added `NvidiaClient` for `nvidia/nemotron-3-ultra-550b-a55b` after an OpenAI live request was rejected with HTTP 429, error type `insufficient_quota` and error code `credit_balance_exhausted`. That OpenAI attempt did not produce a successful research answer.
+```powershell
+.\.venv\Scripts\python.exe -m research_agent.cli demo --mock --port 8001 --no-browser
+```
 
-The NVIDIA addition passed **69 offline tests** in total (the original 61 plus 8 NVIDIA cases). Ruff check/format passed for **62 Python files**, and Pyright reported **0 errors, 0 warnings**. Tests cover the NVIDIA request endpoint and JSON mode, usage accounting, truncated/empty responses, local schema repair, runtime selection, missing credentials and key redaction.
+macOS / Linux:
 
-NVIDIA integration is configured separately with `RA_NVIDIA_API_KEY`; the existing OpenAI/Tavily keys are preserved. At the initial adapter check, no NVIDIA key had been entered. A subsequent [actual live run](eval/results/nvidia-smoke/REPORT.md) completed in 49.5872 seconds with 5 quote-verified findings and 4 sources. Its judge score was only 0.45, so this is integration evidence, not proof of research quality. The raw output and earlier failures are preserved. Prototype endpoint availability does not promise unlimited access or account-specific quota.
+```bash
+.venv/bin/python -m research_agent.cli demo --mock --port 8001 --no-browser
+```
 
-Live testing exposed expensive character deduplication, insufficient context headroom, and unreliable model quotations. Fixes added bounded shingle hashes, missing-subquestion retrieval, synthesis time reservation, budget-aware context packing, literal quote options and one citation-repair attempt. A low available judge score now caps confidence. The expanded offline suite passes **77 tests**, with the same one third-party deprecation warning. The current source passes Ruff check/format; the full mock harness still reports its two known completeness failures.
+Then check it from another terminal, Windows PowerShell:
 
-## Four approved upgrades — 30 October 2026
+```powershell
+Invoke-RestMethod -Uri http://127.0.0.1:8001/health
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8001/research -ContentType 'application/json' -Body '{"question":"Compare vector databases for RAG products.","mode":"mock"}'
+```
 
-The final expanded offline suite passed **88 tests** on Python 3.13.15, with one third-party Starlette/httpx deprecation warning. The final check used `python -m pytest -q --basetemp tmp/pytest-release-final -p no:cacheprovider`; sandbox-only attempts were unable to access Windows temporary directories, so the successful run used the normal local runtime permissions. This is an environment restriction, not a hidden passing assertion. Ruff check/format and Pyright also passed. The mock harness still records **10/12** agent behavior cases versus **4/12** for the baseline; both known completeness failures remain visible.
+macOS / Linux:
 
-New regressions exercise mixed-validity finding recovery without citation invention, reported-token settlement while retaining uncertain timeout reservations, brief question planning, source ranking, benign system-prompt discussion versus direct injection commands, judge-directed claim removal, explicit live-source attribution, removal of synthesis assumptions, and skipping optional revision without enough time for revision plus rejudging. API coverage includes homepage assets/CSP, health without secrets, offline success/failure modes, JSON/Markdown exports and the live fault-mode guard. Launcher tests verify existing-server reuse and free-port startup probing.
+```bash
+curl http://127.0.0.1:8001/health
+curl -X POST http://127.0.0.1:8001/research -H 'Content-Type: application/json' -d '{"question":"Compare vector databases for RAG products.","mode":"mock"}'
+```
 
-An actual mock server was started through `research-agent demo --mock --port 8001 --no-browser`. In an isolated Chrome session, the homepage rendered at 1280×900 and 390×844; submitting the vector example displayed three cited findings. Selecting Offline: search failure produced a labeled insufficient-evidence result with zero sources. The plan/tool disclosure expanded. Both export links were clicked, and the server returned HTTP 200 for their JSON and Markdown attachment routes. Screenshots from these browser checks are under ignored `tmp/research-*.png`. The temporary mock server was stopped after verification; the user's existing server on port 8000 was preserved.
+An earlier loopback smoke run on port 18429 observed status `ok`, provider `mock`, three findings and 38 trace events, trace `53fa7cd03a544a0fba00517ff3720901`. Temporary servers were stopped after their checks; separately started user servers were preserved.
 
-The wheel build succeeded and its archive includes `research_agent/web/index.html`, `style.css`, and `app.js`. The submission ZIP is rebuilt by the explicit whitelist packager, including the homepage and excluding `.env`, local runtime state, caches and temporary directories.
+## Live provider evidence and search provenance
 
-Four actual NVIDIA runs are preserved in `eval/results/approved-upgrade/`, with JSON, Markdown, redacted traces and REPORT.md. Initial biography/memory runs completed without partial flags. A later memory run reached the user's existing 100-second limit during optional revision and returned a correctly labeled partial draft; that observed failure motivated the final time-headroom check. Explicit source attribution was verified live. The final revision-time and application-owned planning-scope guards were checked offline after those live runs. These limited checks do not establish answer accuracy, calibrated confidence, stable external latency or broad live evaluation quality.
+The initial fixture evaluation did not call live providers. Later NVIDIA runs used real model inference and external web retrieval. An OpenAI attempt was rejected with HTTP 429 `insufficient_quota` / `credit_balance_exhausted`; no successful OpenAI research answer or Anthropic live run is asserted. Optional OpenAI/Anthropic adapters have offline HTTP contract tests and do not require their keys when NVIDIA is selected.
+
+Historical NVIDIA outputs and redacted traces are preserved in `eval/results/nvidia-smoke/` and `eval/results/approved-upgrade/`. The initial smoke answer completed in 49.5872 seconds with five quote-verified findings and four sources, but its judge score was 0.45. Later biography and memory runs include completed and partial results. One memory revision reached the configured 100-second deadline; that observed failure motivated the final revision-time guard.
+
+The older trace snapshots exclude tool result bodies and do not explicitly name the successful search provider. They contain successful uncached web searches and no search-provider fallback events. The runtime orders Tavily before DuckDuckGo, so those events are consistent with the primary Tavily path, but the snapshots do not contain a direct successful-provider field. They do not support the former blanket statement that live Tavily credentials were unavailable. New search completion events now include `search_provider`, allowing the current live evaluation to establish the provider directly rather than infer it.
+
+The current NVIDIA harness produced **12/12 structurally valid outputs** over six queries: **4/6** agent behavior checks and **2/6** baseline checks. Two agent results were partial due to tool/page caps. Its twelve committed trace snapshots directly record **13 successful Tavily searches** and no successful DuckDuckGo searches. This establishes Tavily use for this run; it does not retroactively add missing provider fields to older snapshots.
+
+See [EVALUATION.md](EVALUATION.md) for the current live harness results and [live assessment](eval/results/live/REVIEW.md) for per-case review. Model cost is unknown without configured rates; real inference and web retrieval do not establish that access is unlimited or free.
+
+## Regression coverage and practical limits
+
+Tests cover mixed-validity findings without citation invention, conservative budget accounting, brief planning, source ranking, benign system-prompt discussion versus injection commands, judge-directed removal, live-source attribution, application-owned scope assumptions, revision time headroom, SSRF guards, API modes, exports and launcher reuse. Search-provider metadata is now asserted in the API trace regression as well.
+
+Quotation checks establish provenance rather than semantic entailment. Confidence is an uncalibrated heuristic, and model judging is fallible. Local verification is not a claim of public-deployment readiness, exhaustive security coverage, a cross-version operating-system matrix or broad live research accuracy.

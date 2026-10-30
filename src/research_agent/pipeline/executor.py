@@ -84,7 +84,13 @@ class Executor:
         result.latency_ms = round((time.monotonic() - started) * 1000, 3)
         self.results.append(result)
         self.trace.emit(
-            "tool_end", "execute", tool=call.name, **result.model_dump(exclude={"data"})
+            "tool_end",
+            "execute",
+            tool=call.name,
+            search_provider=getattr(result.data, "provider", None)
+            if call.name == "web_search"
+            else None,
+            **result.model_dump(exclude={"data"}),
         )
         return result
 

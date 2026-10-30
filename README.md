@@ -9,7 +9,9 @@
 
 Plan a question, search the web, read useful sources, verify quotations, and inspect how the answer was produced. The project combines a handwritten agent workflow with a local web interface, a CLI, typed API responses, and reproducible offline evaluation.
 
-[Quickstart](#quickstart) · [Architecture](#architecture) · [Evaluation](#validation-and-evaluation) · [Demo guide](DEMO_SCRIPT.md) · [Engineering notes](docs/ENGINEERING.md)
+[Quickstart](#quickstart) · [Architecture](#architecture) · [Evaluation](#validation-and-evaluation) · [Engineering notes](docs/ENGINEERING.md)
+
+**Demo video:** `<add link>`
 
 ![Research Agent homepage showing a question form and configured NVIDIA provider](docs/assets/research-home.png)
 
@@ -58,10 +60,16 @@ For the locked development environment, use `uv sync --extra dev --frozen` inste
 
 ### Already installed?
 
-To open the configured provider from PowerShell:
+Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\python.exe -m research_agent.cli demo
+```
+
+macOS / Linux:
+
+```bash
+.venv/bin/python -m research_agent.cli demo
 ```
 
 The default address is [http://127.0.0.1:8000/](http://127.0.0.1:8000/). The homepage is the demonstration interface; `/docs` remains available for API exploration. Use `--port 8001` when another service occupies the default port, or `--no-browser` to suppress automatic opening.
@@ -83,9 +91,11 @@ RA_MAX_WALL_SECONDS=180
 
 Use a hosted key with access to the selected [NVIDIA model endpoint](https://build.nvidia.com/nvidia/nemotron-3-ultra-550b-a55b). Account access, availability, and quotas depend on the provider. The adapter uses JSON mode followed by application-side schema validation and repair; JSON mode does not guarantee strict schema compliance.
 
-### OpenAI or Anthropic
+### Optional OpenAI or Anthropic adapters
 
 Set `RA_LLM_PROVIDER=openai` with `RA_OPENAI_API_KEY`, or `RA_LLM_PROVIDER=anthropic` with `RA_ANTHROPIC_API_KEY`. Provider and judge model IDs are configurable through the corresponding settings in [.env.example](.env.example). The adapters use provider structured-output formats and validate returned data again with Pydantic.
+
+The recorded live runs use NVIDIA. OpenAI and Anthropic are optional adapters with offline HTTP contract tests; their credentials are unnecessary for the NVIDIA or offline demonstrations. No successful Anthropic live run is claimed.
 
 ### Search and execution limits
 
@@ -127,6 +137,14 @@ Retrieved pages are untrusted data. They cannot register tools, change the plan,
 
 ## Results you can inspect
 
+### Live NVIDIA research
+
+![Actual NVIDIA live result with elapsed time, confidence, citations and source limitations](docs/assets/research-live.png)
+
+*Fresh interactive NVIDIA run: 29.26 seconds, five retained findings, three sources, and no partial flag. Trace `aa0e306df6da40bf8a5c863217be008c`; the [visible output](eval/results/live/ui-demo.txt) and [trace](eval/results/live/ui-demo.trace.jsonl) are preserved. This UI demonstration is separate from the six-query harness below; its claims remain source reports requiring review.*
+
+### Authored offline example
+
 ![Offline research result showing cited findings, literal quotes, sources, and a low-confidence label](docs/assets/research-result.png)
 
 *Authored offline vector-database example. The visible mock label and capped confidence distinguish fixture behavior from live research.*
@@ -148,16 +166,28 @@ The latest executed verification records:
 - **10/12 agent behavior checks passed**, compared with **4/12** for the baseline.
 - **Two known mock completeness failures remain visible:** concrete downsides were omitted in two cases, despite matching quotations.
 
-The behavior counts are **not accuracy scores**. Mock model usage and judge values are synthetic. Live NVIDIA checks establish integration only: one recorded memory run reached its configured 100-second deadline and returned a correctly labeled partial draft.
+The behavior counts are **not accuracy scores**. Mock model usage and judge values are synthetic.
+
+The separate **NVIDIA live harness** evaluated six normal-scenario queries (four research tasks plus clarification/refusal), producing **12/12 schema-valid outputs**. Agent behavior checks passed **4/6**, versus **2/6** for the no-tool baseline. Two agent results were partial due to tool/page caps. Successful completion events directly recorded **13 Tavily searches**. Human review found material support or completeness gaps, including a five-source check that did not establish five distinct companies. See the [live assessment](eval/results/live/REVIEW.md); these narrow checks are not a factual-accuracy benchmark.
 
 Read the [evaluation methodology and failed checks](EVALUATION.md), [per-query results](eval/results/mock/summary.md), and [executed verification record](VERIFICATION.md).
 
 ### Reproduce local checks
 
+Windows PowerShell:
+
 ```powershell
 .\.venv\Scripts\python.exe scripts/tasks.py test
 .\.venv\Scripts\python.exe scripts/tasks.py lint
 .\.venv\Scripts\python.exe scripts/tasks.py eval
+```
+
+macOS / Linux:
+
+```bash
+.venv/bin/python scripts/tasks.py test
+.venv/bin/python scripts/tasks.py lint
+.venv/bin/python scripts/tasks.py eval
 ```
 
 With an activated environment, the equivalent targets are `make test`, `make lint`, `make eval`, and `make demo`. `make demo` runs the offline CLI demonstration; `research-agent demo` starts the browser interface. The portable task runner also works when Make is unavailable.
@@ -166,11 +196,22 @@ With an activated environment, the equivalent targets are `make test`, `make lin
 
 ### CLI examples
 
+Windows PowerShell:
+
 ```powershell
 .\.venv\Scripts\python.exe -m research_agent.cli research "Compare vector databases for a startup RAG product." --mock --output answer.json
 .\.venv\Scripts\python.exe -m research_agent.cli research "Compare approaches to adding memory in an AI support agent." --output live-answer.json
 .\.venv\Scripts\python.exe -m research_agent.cli research "Compare vector databases for RAG products." --mock --scenario timeout --output recovered.json
 .\.venv\Scripts\python.exe -m research_agent.cli trace TRACE_ID_FROM_OUTPUT
+```
+
+macOS / Linux:
+
+```bash
+.venv/bin/python -m research_agent.cli research "Compare vector databases for a startup RAG product." --mock --output answer.json
+.venv/bin/python -m research_agent.cli research "Compare approaches to adding memory in an AI support agent." --output live-answer.json
+.venv/bin/python -m research_agent.cli research "Compare vector databases for RAG products." --mock --scenario timeout --output recovered.json
+.venv/bin/python -m research_agent.cli trace TRACE_ID_FROM_OUTPUT
 ```
 
 Use `--json` for final JSON on stdout. Human-readable CLI output includes a compact execution summary after completion; the JSONL trace is written during execution.
@@ -193,6 +234,12 @@ Example offline request from PowerShell, while the server is running on port 800
 Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8001/research -ContentType 'application/json' -Body '{"question":"Compare vector databases for RAG products.","mode":"mock","scenario":"normal"}'
 ```
 
+macOS / Linux equivalent:
+
+```bash
+curl -X POST http://127.0.0.1:8001/research -H 'Content-Type: application/json' -d '{"question":"Compare vector databases for RAG products.","mode":"mock","scenario":"normal"}'
+```
+
 Failure demonstrations require `mode: "mock"`; scenarios are `normal`, `timeout`, `all_fail`, and `injection`. For live research, leave mode at its `configured` default. [FinalAnswer](src/research_agent/schemas.py) defines findings, sources, confidence, assumptions, limitations, suggested next steps, and run metadata.
 
 ## Project structure
@@ -212,14 +259,11 @@ src/research_agent/
 tests/                    Offline unit, integration, and fault tests
 eval/                     Query rubrics, baseline comparison, and results
 samples/                  Executed mock answers and redacted traces
-docs/                     Engineering notes, upload guide, and screenshots
+docs/                     Engineering notes and screenshots
 scripts/                  Portable tasks, evaluation report, source packaging
 ```
 
 ## Engineering decisions
-
-<details>
-<summary><strong>Review the seven engineering design decisions</strong></summary>
 
 ## 1. Why did you choose an agentic approach here?
 
@@ -251,8 +295,6 @@ Handwritten orchestration improves inspectability at the cost of framework-provi
 
 See [Engineering Notes](docs/ENGINEERING.md) for the detailed failure matrix, source-ranking heuristics, confidence formula, and deployment considerations.
 
-</details>
-
 ## Security and practical limits
 
 - **Keep the service on loopback.** The local API has no authentication or fleet-wide request quotas.
@@ -262,15 +304,13 @@ See [Engineering Notes](docs/ENGINEERING.md) for the detailed failure matrix, so
 - **Keep credentials local.** Common secrets and emails are redacted from traces on a best-effort basis; sensitive research topics may still require access and retention controls.
 - **Recognize heuristic limits.** Injection detection may miss novel attacks or overblock legitimate content. Process-local caches/circuits are not distributed controls, and cancellation cannot forcibly terminate a fallback search thread.
 
-No hosted application or recorded video is included. The [demo script](DEMO_SCRIPT.md) provides a 3–5 minute walkthrough for recording a local demonstration.
+The repository contains source and local setup instructions. The demo video link above will be supplied by the author after recording.
 
 ## Documentation
 
 - [Engineering Notes](docs/ENGINEERING.md) — detailed architecture, reliability, grounding, confidence, and tradeoffs.
 - [Evaluation](EVALUATION.md) — methodology, measured behavior, and known failures.
 - [Verification](VERIFICATION.md) — actual installation, test, browser, and live-check evidence.
-- [Demo Script](DEMO_SCRIPT.md) — recording flow and exact commands.
 - [Submission Guide](SUBMISSION.md) — assignment requirement mapping and handoff notes.
-- [GitHub Upload Guide](docs/GITHUB_UPLOAD.md) — repository description and step-by-step publishing instructions.
 
 Potential next steps include claim-entailment evaluation, source-date extraction, contradiction handling, richer cell-level citations, durable workers, and confidence calibration. Follow-up conversation memory is outside the current implementation.

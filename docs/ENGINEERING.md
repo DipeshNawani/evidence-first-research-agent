@@ -41,24 +41,45 @@ If JSON contains a mix of valid and malformed findings, recovery preserves indiv
 
 ## CLI and API
 
-```sh
-research-agent research "Find 5 Indian B2B SaaS startups in HR tech and summarize their positioning." --mock --output answer.json
-research-agent research "Compare vector databases for RAG products." --mock --scenario timeout --output degraded.json
-research-agent trace TRACE_ID_FROM_OUTPUT
-make serve
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\python.exe -m research_agent.cli research "Find 5 Indian B2B SaaS startups in HR tech and summarize their positioning." --mock --output answer.json
+.\.venv\Scripts\python.exe -m research_agent.cli research "Compare vector databases for RAG products." --mock --scenario timeout --output degraded.json
+.\.venv\Scripts\python.exe -m research_agent.cli trace TRACE_ID_FROM_OUTPUT
+.\.venv\Scripts\python.exe -m uvicorn research_agent.api:app --host 127.0.0.1 --port 8000
 ```
 
-`--json` emits final JSON only on stdout. Human output shows the plan, tool outcomes, fallback/security/gap events, verified findings and stage timings. This compact CLI displays events after execution; the JSONL trace is written during execution.
+macOS / Linux:
 
-The same `POST /research` accepts `mode: "mock"` with `scenario: "normal"`, `"timeout"`, `"all_fail"` or `"injection"`. Fault scenarios require mock mode. `GET /exports/{trace_id}/json` and `/markdown` download a recent HTTP result; `POST /render/markdown` renders a supplied validated `FinalAnswer`. `/health` reports the provider/model and UI version without credentials.
+```bash
+.venv/bin/python -m research_agent.cli research "Find 5 Indian B2B SaaS startups in HR tech and summarize their positioning." --mock --output answer.json
+.venv/bin/python -m research_agent.cli research "Compare vector databases for RAG products." --mock --scenario timeout --output degraded.json
+.venv/bin/python -m research_agent.cli trace TRACE_ID_FROM_OUTPUT
+.venv/bin/python -m uvicorn research_agent.api:app --host 127.0.0.1 --port 8000
+```
 
-```sh
+`--json` emits final JSON only on stdout. Human output shows the plan, tool outcomes, fallback/security/gap events, verified findings and stage timings after execution; the JSONL trace is written during execution.
+
+`POST /research` accepts `mode: "mock"` with `scenario: "normal"`, `"timeout"`, `"all_fail"` or `"injection"`. Fault scenarios require mock mode. `GET /exports/{trace_id}/json` and `/markdown` download a recent HTTP result; `POST /render/markdown` renders a supplied validated `FinalAnswer`. `/health` reports provider/model and UI version without credentials.
+
+HTTP examples, with a server running on port 8000:
+
+Windows PowerShell:
+
+```powershell
+Invoke-RestMethod -Uri http://127.0.0.1:8000/health
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/research -ContentType 'application/json' -Body '{"question":"Compare vector databases for RAG products.","mode":"mock"}'
+Invoke-RestMethod -Uri http://127.0.0.1:8000/traces/TRACE_ID
+```
+
+macOS / Linux:
+
+```bash
 curl http://127.0.0.1:8000/health
-curl -X POST http://127.0.0.1:8000/research -H "Content-Type: application/json" -d '{"question":"Compare vector databases for RAG products."}'
+curl -X POST http://127.0.0.1:8000/research -H 'Content-Type: application/json' -d '{"question":"Compare vector databases for RAG products.","mode":"mock"}'
 curl http://127.0.0.1:8000/traces/TRACE_ID
 ```
-
-PowerShell alternative: `Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/research -ContentType application/json -Body '{"question":"Compare vector databases for RAG products."}'`.
 
 ## 1. Why did you choose an agentic approach here?
 
@@ -156,7 +177,6 @@ The `ddgs` fallback runs in a thread with its own timeout; coroutine cancellatio
 - [eval/results/mock/summary.md](../eval/results/mock/summary.md): per-query agent/baseline metrics.
 - [eval/results/nvidia-smoke/REPORT.md](../eval/results/nvidia-smoke/REPORT.md): an executed NVIDIA live integration check, its raw output, quality limitations and the fixes it exposed.
 - [samples/](../samples/): three executed mock outputs, Markdown renderings and redacted trace snapshots.
-- [DEMO_SCRIPT.md](../DEMO_SCRIPT.md): exact commands and a four-minute recording script.
 - [SUBMISSION.md](../SUBMISSION.md): repository tree, requirement-to-code checklist, verification and remaining handoff tasks.
 
 Future improvements: cell-level comparison citations, model-independent entailment checking, source-date extraction, contradiction-aware synthesis, human-labeled relevance data, semantic retrieval only when justified, persistent cache/worker orchestration, and end-to-end live regression runs. No follow-up memory was added; the focused retrieval and reliability work takes priority.

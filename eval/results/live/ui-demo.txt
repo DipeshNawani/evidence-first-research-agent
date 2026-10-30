@@ -1,0 +1,88 @@
+LIVE RESEARCH · SOURCE-BACKED DRAFT
+
+Your research draft
+Save Markdown
+Save JSON
+CONFIDENCE
+medium79% heuristic
+ELAPSED
+29.3s9 tool attempts
+SOURCES USED
+3100% quote grounding
+MODEL USAGE
+10,938tokens · cost not configured
+SHORT ANSWER
+
+Source [S7] (iternal.ai) reports: Milvus is the most widely adopted open-source vector database in 2026 with 42,000+ GitHub stars and billion-scale indexing capability. Source [S7] (iternal.ai) reports: Weaviate provides native hybrid search and built-in vectorization, making it the strongest alternative for those features. Source [S7] (iternal.ai) reports: All three databases (Milvus, Qdrant, Weaviate) can be self-hosted including in air-gapped environments. Source [S5] (qdrant.tech) reports: Qdrant's benchmarks are open-sourced but the vendor acknowledges potential bias since they build Qdrant. Source [S4] (medium.com) reports: A 2026 production comparison identifies pgvector for general use, Qdrant for performance and filtering, Weaviate for hybrid search, and Milvus for billion-scale workloads.
+
+KEY FINDINGS
+
+Source [S7] (iternal.ai) reports: Milvus is the most widely adopted open-source vector database in 2026 with 42,000+ GitHub stars and billion-scale indexing capability.
+
+Quote matched
+[S7]
+Milvus is the most widely adopted open-source vector database in 2026, with the largest community (42,000+ GitHub stars), billion-scale indexing, and Kubernetes-native deployment.
+
+Source [S7] (iternal.ai) reports: Weaviate provides native hybrid search and built-in vectorization, making it the strongest alternative for those features.
+
+Quote matched
+[S7]
+Weaviate is the strongest alternative when you want native hybrid search and built-in vectorization
+
+Source [S7] (iternal.ai) reports: All three databases (Milvus, Qdrant, Weaviate) can be self-hosted including in air-gapped environments.
+
+Quote matched
+[S7]
+All four can be self-hosted, including in air-gapped environments
+
+Source [S5] (qdrant.tech) reports: Qdrant's benchmarks are open-sourced but the vendor acknowledges potential bias since they build Qdrant.
+
+Quote matched
+[S5]
+Even if we try to be objective, we are not experts in using all the existing vector search engines. We build Qdrant and know the most about it.
+
+Source [S4] (medium.com) reports: A 2026 production comparison identifies pgvector for general use, Qdrant for performance and filtering, Weaviate for hybrid search, and Milvus for billion-scale workloads.
+
+Quote matched
+[S4]
+Open-source vector databases worth evaluating in 2026: pgvector for general use, Qdrant for performance and filtering, Weaviate for hybrid search, Milvus for billion-scale
+COMPARISON
+Item / source	Supported observation	Sources
+Best Vector Databases 2026: Pinecone vs Weaviate vs Milvus	Source [S7] (iternal.ai) reports: Milvus is the most widely adopted open-source vector database in 2026 with 42,000+ GitHub stars and billion-scale indexing capability.	S7
+Best Vector Databases 2026: Pinecone vs Weaviate vs Milvus	Source [S7] (iternal.ai) reports: Weaviate provides native hybrid search and built-in vectorization, making it the strongest alternative for those features.	S7
+Best Vector Databases 2026: Pinecone vs Weaviate vs Milvus	Source [S7] (iternal.ai) reports: All three databases (Milvus, Qdrant, Weaviate) can be self-hosted including in air-gapped environments.	S7
+Vector Search Benchmarks - Qdrant	Source [S5] (qdrant.tech) reports: Qdrant's benchmarks are open-sourced but the vendor acknowledges potential bias since they build Qdrant.	S5
+Medium	Source [S4] (medium.com) reports: A 2026 production comparison identifies pgvector for general use, Qdrant for performance and filtering, Weaviate for hybrid search, and Milvus for billion-scale workloads.	S4
+SUGGESTED NEXT STEPS
+Run independent benchmarks on your specific embedding dimensions and query patterns
+Evaluate managed vs self-hosted operational burden for your team size
+Test hybrid search quality on your domain-specific data with Weaviate
+Assess Milvus Kubernetes operational expertise requirements
+Review Qdrant quantization trade-offs for your cost/accuracy requirements
+SOURCES USED
+[S4]Medium
+
+medium.com · snippet · source score 0.71
+
+[S5]Vector Search Benchmarks - Qdrant
+
+qdrant.tech · page · source score 0.67
+
+[S7]Best Vector Databases 2026: Pinecone vs Weaviate vs Milvus
+
+iternal.ai · snippet · source score 0.59
+
+Limitations
+No independent 2025-2026 benchmark results with quantitative latency/throughput comparisons provided in evidence
+Vendor benchmarks (Qdrant) acknowledged as potentially biased
+Licensing details for Weaviate (BSD-3-Clause) inferred from general knowledge, not explicitly cited
+No production case studies with specific metrics cited for any database
+Ease of deployment comparison lacks concrete setup time or complexity metrics
+Evidence context was shortened to fit the model token budget; some source detail was omitted.
+Removed 1 citation(s) whose source did not contain the supporting quote.
+The model judge flagged and removed 1 claim(s) not adequately supported by their cited evidence.
+Fetched evidence was truncated to the configured character budget; later context may be missing.
+Some sources were unavailable as full pages; search snippets were used where sufficient.
+Dropped 1 sources: evidence_budget.
+Assumptions
+Plan & tool activity aa0e306df6da40bf8a5c863217be008c

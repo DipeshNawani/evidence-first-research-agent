@@ -1,6 +1,6 @@
-# Evaluation: executed mock run
+# Evaluation: offline fixtures and live provider runs
 
-Executed at **2026-10-30T04:14:39.921291+00:00**. Source of every number below: `eval/results/mock/results.json`. Reproduce with `python eval/run_eval.py --mock`; regenerate this narrative with `python scripts/write_eval_report.py`. Per-case metrics and full validated answers are committed. Nothing in this report is a live-model result.
+The offline evaluation was executed at **2026-10-30T04:14:39.921291+00:00**. Its metrics below come from `eval/results/mock/results.json`; the separate **Executed live evaluation** section uses the live result files and traces. Per-case metrics and full validated answers are committed. The two modes are not combined into an accuracy score.
 
 ## Method and denominators
 
@@ -47,19 +47,54 @@ The offline pytest suite exercises actual cancellation, exponential retry classi
 
 ## Next improvements
 
-1. Run real providers on the four assignment examples; add a blind human rubric for balance, factual correctness, usefulness and missing criteria.
+1. Repeat the four live research examples across runs and add a blind human rubric for balance, factual correctness, usefulness and missing criteria.
 2. Replace or supplement the extractive mock with hand-authored expected-output variants for judge/revision tests; keep authored fixtures clearly separated from research results.
 3. Add cell-level evidence to richer comparison matrices and evaluate entailment rather than quotation presence alone.
 4. Expand ambiguous/unsafe/future-intent coverage beyond the deliberately small preflight rules; test contradictions and subtle injection attempts.
 5. Calibrate confidence and source heuristics with labeled data, audit domain independence and add real publication dates.
 6. Compare single-call, retrieval-only synthesis, and planned retrieval on the same evidence/task set; evaluate repeated runs and variance.
 
-## Live run handoff (not executed)
+## Executed live evaluation
 
-No live-provider keys were available during the initial mock evaluation. A separate [NVIDIA live integration check](eval/results/nvidia-smoke/REPORT.md) now records one real answered query and its quality limitations; the full live agent-versus-baseline harness remains unexecuted. Set the provider and secrets in `.env`, then run:
+Executed at **2026-10-30T05:13:37.226810+00:00**, separately from the authored mock evaluation. Sources: [raw live outputs](eval/results/live/results.json), [per-query summary](eval/results/live/summary.md), and [redacted trace snapshots](eval/results/live/traces/).
 
-```sh
-python eval/run_eval.py --live
+- Evaluated **6 normal-scenario queries** against both systems, producing **12 outputs**. Deterministic clarification/refusal cases are included in that denominator; synthetic fault scenarios are skipped: unknowable_recent_fact, seo_spam, injection_source, provider_timeout, all_providers_down, page_fetch_denied.
+- Schema-valid final outputs: **12/12**. This includes application recovery, not just raw model compliance.
+- Agent behavior checks: **4/6**; no-tool baseline: **2/6**.
+- Agent answers with cited findings: **4/6**. Mean pre-removal quotation grounding on those answers: **78.3%**; mean retained verified-claim fraction: **100.0%**.
+- Partial agent runs: **2/6**. Mean recorded agent latency across all cases: **34.24 s**; baseline: **10.34 s**. Preflight exits make these averages smaller than a substantive research request.
+- Reported tokens: agent **48,378**, baseline **7,727**. Timed-out calls may consume unreported tokens; these totals cover responses whose usage was returned.
+- Model IDs returned: `nvidia/nemotron-3-ultra-550b-a55b`.
+- Explicit search-provider evidence from successful tool events: **tavily: 13 successful search calls**.
+- Model cost remains unknown where rates are not configured; search and infrastructure costs are not measured. No zero-cost inference claim is made.
+
+### Live failed checks
+
+- **vector_comparison / baseline**: three_sources, verified_findings, comparison.
+- **indian_hr_saas / baseline**: five_sources, verified_findings.
+- **multi_agent_support / agent**: concrete_downside.
+- **multi_agent_support / baseline**: three_sources, verified_findings, concrete_downside.
+- **support_memory / agent**: concrete_downside.
+- **support_memory / baseline**: three_sources, verified_findings, comparison, concrete_downside.
+
+### Live interpretation and human review
+
+The no-tool baseline cannot supply verified external citations by design. Behavior checks are narrow contracts, not accuracy scores. Quote matches do not establish semantic entailment, independence or factual correctness; the model judge is not ground truth. Review [the live assessment](eval/results/live/REVIEW.md) for per-case expected behavior, observed findings, missing criteria and output limitations. Historical integration failures remain under the earlier NVIDIA reports rather than being replaced by this run.
+
+### Reproduce the live harness
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\python.exe eval/run_eval.py --live
+.\.venv\Scripts\python.exe scripts/write_eval_report.py
 ```
 
-Live results go to `eval/results/live/`; fixture fault cases are explicitly skipped. Keep `results.json` and `summary.md`, record provider/model IDs and configured pricing rates, and add a dated human assessment here. Required fields to fill after execution: live case count, schema/grounding outcomes, factual errors found, rubric scores, actual token usage, model/search spend, stage latency distributions, baseline comparison, and model/provider failure cases. **No full live-benchmark metrics are claimed in this mock evaluation.** The separate smoke report preserves one real integration run without presenting it as a benchmark.
+macOS / Linux:
+
+```bash
+.venv/bin/python eval/run_eval.py --live
+.venv/bin/python scripts/write_eval_report.py
+```
+
+Configure the selected provider locally before running. New runs overwrite the live harness outputs, so preserve evidence needed for a submission first.

@@ -199,6 +199,12 @@ def test_homepage_offline_modes_export_and_live_fault_guard(tmp_path: Path) -> N
             json={"question": "Compare vector databases for RAG products.", "mode": "mock"},
         ).json()
         assert result["meta"]["mode"] == "mock" and len(result["sources"]) == 3
+        events = client.get("/traces/" + result["meta"]["trace_id"]).json()
+        assert any(
+            event["event"] == "tool_end"
+            and event["data"].get("search_provider") == "fixture-primary"
+            for event in events
+        )
         report = client.post("/render/markdown", json=result)
         assert report.status_code == 200 and "MOCK RUN" in report.text
         export_path = "/exports/" + result["meta"]["trace_id"]

@@ -16,3 +16,5 @@ build/
 *.egg-info/
 .DS_Store
 Thumbs.db
+/DEMO_SCRIPT.md
+/recording-notes/
