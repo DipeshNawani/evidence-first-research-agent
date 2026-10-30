@@ -29,12 +29,12 @@
     }
   },
   "meta": {
-    "trace_id": "2b68333efde142f899e54d9ff1c71ca4",
+    "trace_id": "9f2c51d7cc7f415081c3b77ee9e1b630",
     "mode": "mock",
-    "latency_s": 0.0375,
+    "latency_s": 0.0339,
     "tool_calls": 8,
-    "tokens": 298,
-    "token_upper_bound_reserved": 5432,
+    "tokens": 330,
+    "token_upper_bound_reserved": 330,
     "est_cost_usd": 0.0,
     "models": [
       "mock-extractive-v1"
@@ -47,11 +47,11 @@
     "partial": false,
     "status": "insufficient_evidence",
     "stage_latency_s": {
-      "understand": 0.000464,
-      "plan": 0.005539,
-      "execute": 0.023398,
-      "filter": 0.0031019999999999997,
-      "confidence": 0.001063
+      "understand": 0.000319,
+      "plan": 0.009346,
+      "execute": 0.018424,
+      "filter": 0.0017950000000000002,
+      "confidence": 0.000841
     }
   }
 }

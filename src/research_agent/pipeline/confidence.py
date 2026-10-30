@@ -52,6 +52,9 @@ def compute_confidence(
     )
     if not findings:
         score = min(score, 0.2)
+    if judge_score is not None and judge_score < 0.5:
+        score = min(score, 0.54)
+        factors["judge_quality_guardrail"] = 0.54
     if mock:
         score = min(score, 0.5)  # Authored fixtures cannot justify real-world confidence.
     score = round(max(0, min(1, score)), 4)

@@ -1,7 +1,7 @@
 """Pydantic boundaries for model, tools, API, evaluation and persisted traces."""
 
 from datetime import UTC, datetime
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -33,6 +33,7 @@ class Plan(Schema):
     success_criteria: list[str]
     assumptions: list[str]
     stop_condition: str
+    effort: Literal["brief", "research"] = "research"
 
 
 class SearchArgs(Schema):
@@ -143,6 +144,9 @@ class JudgeScore(Schema):
     source_quality: float = Field(ge=0, le=1)
     clarity: float = Field(ge=0, le=1)
     issues: list[str]
+    unsupported_finding_indices: list[Annotated[int, Field(ge=0, le=11)]] = Field(
+        default_factory=list, max_length=12
+    )
 
     @property
     def score(self) -> float:
@@ -204,6 +208,17 @@ class TraceEvent(Schema):
 
 class ResearchRequest(Schema):
     question: str = Field(min_length=0, max_length=4000)
+    mode: Literal["configured", "mock"] = "configured"
+    scenario: Literal["normal", "timeout", "all_fail", "injection"] = "normal"
+
+
+class HealthResponse(Schema):
+    status: Literal["ok"] = "ok"
+    service: Literal["research-agent"] = "research-agent"
+    provider: str
+    model: str
+    ui_version: str = "1"
+    max_wall_seconds: float
 
 
 class EvalCase(Schema):

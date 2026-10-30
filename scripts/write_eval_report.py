@@ -82,13 +82,13 @@ The offline pytest suite exercises actual cancellation, exponential retry classi
 
 ## Live run handoff (not executed)
 
-No live-provider keys were available. Set the provider and secrets in `.env`, then run:
+No live-provider keys were available during the initial mock evaluation. A separate [NVIDIA live integration check](eval/results/nvidia-smoke/REPORT.md) now records one real answered query and its quality limitations; the full live agent-versus-baseline harness remains unexecuted. Set the provider and secrets in `.env`, then run:
 
 ```sh
 python eval/run_eval.py --live
 ```
 
-Live results go to `eval/results/live/`; fixture fault cases are explicitly skipped. Keep `results.json` and `summary.md`, record provider/model IDs and configured pricing rates, and add a dated human assessment here. Required fields to fill after execution: live case count, schema/grounding outcomes, factual errors found, rubric scores, actual token usage, model/search spend, stage latency distributions, baseline comparison, and model/provider failure cases. **No live metrics are claimed in this submission.**
+Live results go to `eval/results/live/`; fixture fault cases are explicitly skipped. Keep `results.json` and `summary.md`, record provider/model IDs and configured pricing rates, and add a dated human assessment here. Required fields to fill after execution: live case count, schema/grounding outcomes, factual errors found, rubric scores, actual token usage, model/search spend, stage latency distributions, baseline comparison, and model/provider failure cases. **No full live-benchmark metrics are claimed in this mock evaluation.** The separate smoke report preserves one real integration run without presenting it as a benchmark.
 """
     (ROOT / "EVALUATION.md").write_text(report, encoding="utf-8")
 

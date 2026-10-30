@@ -57,3 +57,12 @@ class Budget:
             raise BudgetExceeded("tokens")
         # Keep reservations spent even when providers time out: billing is uncertain.
         self.reserved_tokens += input_upper_bound + output_limit
+
+    def settle_llm(self, reservation: int, actual_tokens: int) -> None:
+        """Release unused allowance only after a provider reports actual usage.
+
+        Failed/timed-out attempts never settle: their billing remains uncertain.
+        """
+        self.reserved_tokens += actual_tokens - reservation
+        if self.reserved_tokens > self.settings.max_total_tokens:
+            self.partial = True

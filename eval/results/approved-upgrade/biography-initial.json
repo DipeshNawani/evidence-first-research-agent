@@ -1,0 +1,106 @@
+{
+  "short_answer": "Mahendra Singh Dhoni was born on 7 July 1981 in Ranchi, Bihar (now Jharkhand), India. Dhoni captained the Indian national team to victory in the 2011 Cricket World Cup. Dhoni led India to the Twenty20 (T20) world title in 2007. Dhoni made his international debut in 2004.",
+  "key_findings": [
+    {
+      "claim": "Mahendra Singh Dhoni was born on 7 July 1981 in Ranchi, Bihar (now Jharkhand), India.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "M.S. Dhoni (born July 7, 1981, Ranchi, Bihar [now Jharkhand] state, India)",
+      "verified": true
+    },
+    {
+      "claim": "Dhoni captained the Indian national team to victory in the 2011 Cricket World Cup.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "captaincy of the Indian national team that won the one-day Cricket World Cup in 2011",
+      "verified": true
+    },
+    {
+      "claim": "Dhoni led India to the Twenty20 (T20) world title in 2007.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "led India to the Twenty20 (T20) world title",
+      "verified": true
+    },
+    {
+      "claim": "Dhoni made his international debut in 2004.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "Dhoni made his international debut in 2004",
+      "verified": true
+    }
+  ],
+  "comparison_table": null,
+  "assumptions": [
+    "Interpret the request as a brief overview; all factual details still need evidence."
+  ],
+  "limitations": [
+    "Evidence limited to two sources (Britannica and ESPNcricinfo snippets).",
+    "No details on IPL career, Test captaincy record, or post-retirement roles provided in the snippets.",
+    "Removed 1 citation(s) whose source did not contain the supporting quote.",
+    "Some sources were unavailable as full pages; search snippets were used where sufficient.",
+    "Dropped 1 sources: injection_quarantined."
+  ],
+  "suggested_next_steps": [
+    "Consult full Britannica article or ESPNcricinfo profile for comprehensive career statistics and records.",
+    "Verify current age and recent activities from up-to-date sources."
+  ],
+  "user_question": "Who is Mahendra Singh Dhoni?",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "M.S. Dhoni | Biography, Facts, & Awards | Britannica",
+      "url": "https://www.britannica.com/biography/M-S-Dhoni",
+      "domain": "www.britannica.com",
+      "quality_score": 0.7275,
+      "retrieved_at": "2026-10-30T03:52:50.352223Z",
+      "provenance": "snippet"
+    }
+  ],
+  "confidence": {
+    "level": "medium",
+    "score": 0.7024,
+    "factors": {
+      "independent_sources": 0.3333333333333333,
+      "quality": 0.7275,
+      "grounding": 1.0,
+      "agreement_proxy": 0.5,
+      "judge": 0.9325,
+      "tool_health": 0.33333333333333337,
+      "gap_coverage": 1.0
+    }
+  },
+  "meta": {
+    "trace_id": "716a83f700e54bc786fde8b5cb1d2405",
+    "mode": "live",
+    "latency_s": 15.0753,
+    "tool_calls": 3,
+    "tokens": 3884,
+    "token_upper_bound_reserved": 3884,
+    "est_cost_usd": null,
+    "models": [
+      "nvidia/nemotron-3-ultra-550b-a55b"
+    ],
+    "plan_summary": "Who is Mahendra Singh Dhoni?",
+    "dropped_sources_count": 1,
+    "grounding_rate": 1.0,
+    "judge_score": 0.9325,
+    "tool_failure_rate": 0.6666666666666666,
+    "partial": false,
+    "status": "completed",
+    "stage_latency_s": {
+      "understand": 0.001333,
+      "plan": 0.018724,
+      "execute": 2.569816,
+      "filter": 0.005485,
+      "synthesize": 6.380561,
+      "verify": 0.002086,
+      "judge": 6.089967,
+      "confidence": 0.002367
+    }
+  }
+}

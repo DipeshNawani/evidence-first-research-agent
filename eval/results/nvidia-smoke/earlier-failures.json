@@ -1,0 +1,209 @@
+[
+  {
+    "short_answer": "Insufficient verified evidence to answer reliably.",
+    "key_findings": [],
+    "comparison_table": null,
+    "assumptions": [
+      "Startup context implies limited DevOps bandwidth, preference for managed/self-hosted flexibility, and need for rapid iteration.",
+      "RAG workload = dense vector search + metadata filtering + hybrid (keyword+vector) search at <100M vectors initially.",
+      "Open-source license must be permissive (Apache 2.0, MIT, BSD) or source-available with acceptable commercial terms.",
+      "Comparison focuses on the latest stable major versions as of 2024."
+    ],
+    "limitations": [
+      "Synthesis was unavailable or output failed schema validation.",
+      "Could not gather and synthesize verified evidence; no factual answer is established.",
+      "Fetched evidence was truncated to the configured character budget; later context may be missing.",
+      "Some sources were unavailable as full pages; search snippets were used where sufficient.",
+      "Dropped 21 sources: evidence_budget, injection_quarantined.",
+      "Independent model judge unavailable or disabled; confidence uses a conservative default.",
+      "Budget exhausted: this is a partial best-effort result."
+    ],
+    "suggested_next_steps": [
+      "Inspect the sources and retry with a working model provider."
+    ],
+    "user_question": "Compare the top 3 open-source vector databases for a startup building RAG products.",
+    "sources": [],
+    "confidence": {
+      "level": "low",
+      "score": 0.2,
+      "factors": {
+        "independent_sources": 0.0,
+        "quality": 0.0,
+        "grounding": 0.0,
+        "agreement_proxy": 0.0,
+        "judge": 0.4,
+        "tool_health": 0.625,
+        "gap_coverage": 1.0
+      }
+    },
+    "meta": {
+      "trace_id": "24b7c356ccd04890913eedae0cd69bd1",
+      "mode": "live",
+      "latency_s": 100.0204,
+      "tool_calls": 16,
+      "tokens": 1507,
+      "token_upper_bound_reserved": 25109,
+      "est_cost_usd": null,
+      "models": [
+        "nvidia/nemotron-3-ultra-550b-a55b"
+      ],
+      "plan_summary": "Compare the top 3 open-source vector databases (by adoption and community) for a startup building Retrieval-Augmented Generation (RAG) products, evaluating them on performance, scalability, ease of use, ecosystem, and operational maturity.",
+      "dropped_sources_count": 21,
+      "grounding_rate": 0.0,
+      "judge_score": null,
+      "tool_failure_rate": 0.375,
+      "partial": true,
+      "status": "insufficient_evidence",
+      "stage_latency_s": {
+        "understand": 0.001453,
+        "plan": 32.846309,
+        "execute": 10.50398,
+        "filter": 54.981944999999996,
+        "synthesize": 1.678654,
+        "verify": 0.001119,
+        "confidence": 0.001136
+      }
+    }
+  },
+  {
+    "short_answer": "Insufficient verified evidence to answer reliably.",
+    "key_findings": [],
+    "comparison_table": null,
+    "assumptions": [
+      "Startup prioritizes managed cloud options to reduce ops burden but wants open-source portability.",
+      "RAG workload involves hybrid search (vector + keyword/metadata) at <100M vectors initially.",
+      "Team uses Python/TypeScript with LangChain or LlamaIndex.",
+      "License must be permissive (Apache 2.0, MIT, BSD) or acceptable copyleft (GPL/AGPL) with clear commercial terms."
+    ],
+    "limitations": [
+      "Synthesis was unavailable or output failed schema validation.",
+      "Could not gather and synthesize verified evidence; no factual answer is established.",
+      "Fetched evidence was truncated to the configured character budget; later context may be missing.",
+      "Some sources were unavailable as full pages; search snippets were used where sufficient.",
+      "Dropped 4 sources: evidence_budget, injection_quarantined.",
+      "Independent model judge unavailable or disabled; confidence uses a conservative default.",
+      "Budget exhausted: this is a partial best-effort result."
+    ],
+    "suggested_next_steps": [
+      "Inspect the sources and retry with a working model provider."
+    ],
+    "user_question": "Compare the top 3 open-source vector databases for a startup building RAG products.",
+    "sources": [],
+    "confidence": {
+      "level": "low",
+      "score": 0.2,
+      "factors": {
+        "independent_sources": 0.0,
+        "quality": 0.0,
+        "grounding": 0.0,
+        "agreement_proxy": 0.0,
+        "judge": 0.4,
+        "tool_health": 0.7777777777777778,
+        "gap_coverage": 1.0
+      }
+    },
+    "meta": {
+      "trace_id": "b06023b0f3324e26a93db159a7be323c",
+      "mode": "live",
+      "latency_s": 22.7831,
+      "tool_calls": 9,
+      "tokens": 1512,
+      "token_upper_bound_reserved": 5873,
+      "est_cost_usd": null,
+      "models": [
+        "nvidia/nemotron-3-ultra-550b-a55b"
+      ],
+      "plan_summary": "Compare the top 3 open-source vector databases suitable for a startup building RAG products, evaluating them on performance, scalability, ease of use, ecosystem, and licensing.",
+      "dropped_sources_count": 4,
+      "grounding_rate": 0.0,
+      "judge_score": null,
+      "tool_failure_rate": 0.2222222222222222,
+      "partial": true,
+      "status": "insufficient_evidence",
+      "stage_latency_s": {
+        "understand": 0.0014,
+        "plan": 17.474061,
+        "execute": 5.264975,
+        "filter": 0.028141,
+        "synthesize": 0.006998,
+        "verify": 0.001923,
+        "confidence": 0.000977
+      }
+    }
+  },
+  {
+    "short_answer": "Insufficient verified evidence to answer reliably.",
+    "key_findings": [],
+    "comparison_table": null,
+    "assumptions": [
+      "Startup has engineering capacity for self-hosted operations or budget for managed tiers",
+      "RAG workload requires hybrid search (semantic + keyword) and metadata filtering",
+      "Scale target is up to 100M-1B vectors with multi-tenant requirements",
+      "The startup prioritizes open-source (OSI-approved) licenses to avoid vendor lock-in.",
+      "RAG workload involves hybrid search (vector + keyword/metadata) and metadata filtering.",
+      "Team has limited DevOps capacity, so managed cloud offerings are a plus."
+    ],
+    "limitations": [
+      "Evidence relies on 2026 vendor benchmarks and review articles; independent benchmarks with your data recommended",
+      "Operational complexity varies significantly: Milvus requires more DevOps resources than Qdrant or Weaviate",
+      "License terms (Apache 2.0 vs BSD-3) may affect commercialization strategy",
+      "Managed service pricing and SLA details not covered in evidence",
+      "Evidence context was shortened to fit the model token budget; some source detail was omitted.",
+      "Removed 5 finding(s) with invalid or unsupported quotations.",
+      "Could not gather and synthesize verified evidence; no factual answer is established.",
+      "Fetched evidence was truncated to the configured character budget; later context may be missing.",
+      "Some sources were unavailable as full pages; search snippets were used where sufficient.",
+      "Dropped 5 sources: evidence_budget, injection_quarantined.",
+      "Independent model judge unavailable or disabled; confidence uses a conservative default."
+    ],
+    "suggested_next_steps": [
+      "Run proof-of-concept with your embedding model and query patterns on all three",
+      "Evaluate managed service costs (Zilliz Cloud, Weaviate Cloud, Qdrant Cloud) at projected scale",
+      "Test multi-tenancy isolation guarantees with your data privacy requirements",
+      "Verify framework integration maturity for your specific LangChain/LlamaIndex version"
+    ],
+    "user_question": "Compare the top 3 open-source vector databases for a startup building RAG products.",
+    "sources": [],
+    "confidence": {
+      "level": "low",
+      "score": 0.2,
+      "factors": {
+        "independent_sources": 0.0,
+        "quality": 0.0,
+        "grounding": 0.0,
+        "agreement_proxy": 0.0,
+        "judge": 0.4,
+        "tool_health": 0.6666666666666667,
+        "gap_coverage": 1.0
+      }
+    },
+    "meta": {
+      "trace_id": "afef1c5e4e8045c690137c2c95a2ac6c",
+      "mode": "live",
+      "latency_s": 51.4017,
+      "tool_calls": 9,
+      "tokens": 6178,
+      "token_upper_bound_reserved": 21942,
+      "est_cost_usd": null,
+      "models": [
+        "nvidia/nemotron-3-ultra-550b-a55b"
+      ],
+      "plan_summary": "Compare the top 3 open-source vector databases suitable for a startup building RAG products, evaluating them on performance, scalability, ease of use, ecosystem, and licensing.",
+      "dropped_sources_count": 5,
+      "grounding_rate": 0.0,
+      "judge_score": null,
+      "tool_failure_rate": 0.3333333333333333,
+      "partial": false,
+      "status": "insufficient_evidence",
+      "stage_latency_s": {
+        "understand": 0.001167,
+        "plan": 16.22833,
+        "execute": 6.380748,
+        "filter": 0.051806,
+        "synthesize": 28.705841,
+        "verify": 0.029087,
+        "confidence": 0.000882
+      }
+    }
+  }
+]

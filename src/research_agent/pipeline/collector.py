@@ -27,20 +27,40 @@ class Collector:
         self.pages: dict[str, PageData] = {}
         self.attempted: set[str] = set()
         self.quarantined: set[str] = set()
+        self.page_limit = settings.max_pages
 
     async def collect(self, question: str, plan: Plan) -> CollectionResult:
         result = CollectionResult(gaps=len(plan.sub_questions))
+        gap_ids = {step.id for step in plan.sub_questions}
+        filter_settings = self.settings
+        if plan.effort == "brief":
+            self.page_limit = min(self.settings.max_pages, self.settings.brief_max_pages)
+            filter_settings = self.settings.model_copy(
+                update={
+                    "max_evidence": min(
+                        self.settings.max_evidence, self.settings.brief_max_evidence
+                    )
+                }
+            )
         for round_index in range(self.settings.max_rounds):
             if self.budget.remaining() <= 0 or self.budget.partial:
                 break
+            if round_index and self.budget.remaining() <= self.settings.synthesis_reserve_seconds:
+                self.trace.emit(
+                    "retrieval_stopped",
+                    "execute",
+                    reason="reserve_time_for_synthesis",
+                    remaining_s=self.budget.remaining(),
+                )
+                break
             with self.trace.stage("execute"):
-                await self.discover(plan, round_index)
+                await self.discover(plan, round_index, gap_ids)
                 await self.read(question)
             with self.trace.stage("filter"):
                 filtered = filter_sources(
                     self.candidates(),
                     question,
-                    self.settings,
+                    filter_settings,
                     mock=self.settings.llm_provider == "mock",
                 )
                 dropped = filtered.dropped_sources + [
@@ -49,8 +69,10 @@ class Collector:
                 ]
                 for item in dropped:
                     self.trace.emit("dropped_source", "filter", **item.model_dump())
-                gaps = sum(
-                    len(
+                gap_ids = {
+                    step.id
+                    for step in plan.sub_questions
+                    if len(
                         {
                             e.source.domain
                             for e in filtered.evidence
@@ -58,8 +80,8 @@ class Collector:
                         }
                     )
                     < 2
-                    for step in plan.sub_questions
-                )
+                }
+                gaps = len(gap_ids)
                 result = CollectionResult(
                     evidence=filtered.evidence,
                     dropped_sources=dropped,
@@ -90,7 +112,7 @@ class Collector:
                 break
         return result
 
-    async def discover(self, plan: Plan, round_index: int) -> None:
+    async def discover(self, plan: Plan, round_index: int, gap_ids: set[str] | None = None) -> None:
         calls = [
             ToolCall(
                 name=step.tool,
@@ -103,6 +125,7 @@ class Collector:
                 sub_question_id=step.id,
             )
             for step in plan.sub_questions
+            if gap_ids is None or step.id in gap_ids
             for query in step.search_queries
         ]
         results = await self.executor.batch(calls)
@@ -128,7 +151,7 @@ class Collector:
     async def read(self, question: str) -> None:
         ranked = sorted(
             self.hits.items(),
-            key=lambda item: -score_source(item[1][0], item[1][0].snippet, question),
+            key=lambda item: -score_source(item[1][0], item[1][0].snippet, question, self.settings),
         )
         selected: list[tuple[str, SearchHit, list[str]]] = []
         for key, (hit, ids, read) in ranked:
@@ -138,10 +161,11 @@ class Collector:
             elif (
                 read
                 and key not in self.attempted
-                and score_source(hit, hit.snippet, question) >= self.settings.source_threshold
+                and score_source(hit, hit.snippet, question, self.settings)
+                >= self.settings.source_threshold
             ):
                 selected.append((key, hit, ids))
-        selected = selected[: max(0, self.settings.max_pages - self.budget.pages)]
+        selected = selected[: max(0, self.page_limit - self.budget.pages)]
         results = await self.executor.batch(
             [
                 ToolCall(name="fetch_page", args={"url": hit.url}, sub_question_id=ids[0])

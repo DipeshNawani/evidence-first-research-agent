@@ -1,0 +1,219 @@
+{
+  "short_answer": "Four distinct memory architectures have emerged: flat vector stores (Mem0, Zep), episodic page-in/page-out systems (Letta, MemGPT), knowledge-graph-backed stores (GraphRAG on Neo4j or TypeDB), and hybrid combinations. Vector databases retrieve semantically similar content via embedding search: fast, zero cold-start, and excellent for unstructured recall. Knowledge graphs traverse explicit entity relationships: deterministic, multi-hop, and explainable. Episodic systems use a context-resident working memory with long-term records in an external vector or structured store, but suffer from attentional dilution within the context window. Hybrid AI agents blend LLM generative responses with knowledge-graph-backed curated knowledge, enabling human-governed delivery alongside real-time generation.",
+  "key_findings": [
+    {
+      "claim": "Four distinct memory architectures have emerged: flat vector stores (Mem0, Zep), episodic page-in/page-out systems (Letta, MemGPT), knowledge-graph-backed stores (GraphRAG on Neo4j or TypeDB), and hybrid combinations.",
+      "source_ids": [
+        "S2"
+      ],
+      "supporting_quote": "In the last twelve months, four distinct memory architectures have settled out of the noise: flat vector stores (Mem0, Zep), episodic page-in/page-out systems (Letta, MemGPT), knowledge-graph-backed stores (graph-RAG on Neo4j or TypeDB), and hybrid combinations that stitch two or three together.",
+      "verified": true
+    },
+    {
+      "claim": "Vector databases retrieve semantically similar content via embedding search: fast, zero cold-start, and excellent for unstructured recall.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "Vector databases retrieve semantically similar content via embedding search: fast, zero cold-start, and excellent for unstructured recall.",
+      "verified": true
+    },
+    {
+      "claim": "Knowledge graphs traverse explicit entity relationships: deterministic, multi-hop, and explainable.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "Knowledge graphs traverse explicit entity relationships: deterministic, multi-hop, and explainable.",
+      "verified": true
+    },
+    {
+      "claim": "Episodic systems use a context-resident working memory with long-term records in an external vector or structured store, but suffer from attentional dilution within the context window.",
+      "source_ids": [
+        "S4"
+      ],
+      "supporting_quote": "A less obvious but equally important limitation of context-resident memory is attentional dilution.",
+      "verified": true
+    },
+    {
+      "claim": "Hybrid AI agents blend LLM generative responses with knowledge-graph-backed curated knowledge, enabling human-governed delivery alongside real-time generation.",
+      "source_ids": [
+        "S5"
+      ],
+      "supporting_quote": "With this blended Hybrid AI Agent, enterprises and AI Agent builders can now leverage kama.ai's human-governed knowledge delivery alongside real-time LLM generative responses.",
+      "verified": true
+    },
+    {
+      "claim": "Forgetting policies are under-evaluated; only MemoryAgentBench tests selective forgetting explicitly, and inability to discard outdated information gradually poisons retrieval precision.",
+      "source_ids": [
+        "S4"
+      ],
+      "supporting_quote": "Nobody evaluates forgetting well. Only MemoryAgentBench tests selective forgetting explicitly. Yet in any long-running deployment, the inability to discard outdated information gradually poisons retrieval precision.",
+      "verified": true
+    }
+  ],
+  "comparison_table": {
+    "columns": [
+      "Supported observation"
+    ],
+    "rows": [
+      {
+        "item": "Agent Memory Architectures: Vector vs Graph vs Episodic",
+        "cells": [
+          "Four distinct memory architectures have emerged: flat vector stores (Mem0, Zep), episodic page-in/page-out systems (Letta, MemGPT), knowledge-graph-backed stores (GraphRAG on Neo4j or TypeDB), and hybrid combinations."
+        ],
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "item": "Vector Database vs Knowledge Graph: Choosing for Agent Memory",
+        "cells": [
+          "Vector databases retrieve semantically similar content via embedding search: fast, zero cold-start, and excellent for unstructured recall."
+        ],
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "item": "Vector Database vs Knowledge Graph: Choosing for Agent Memory",
+        "cells": [
+          "Knowledge graphs traverse explicit entity relationships: deterministic, multi-hop, and explainable."
+        ],
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "item": "Memory for Autonomous LLM Agents:Mechanisms, Evaluation, and Emerging Frontiers",
+        "cells": [
+          "Episodic systems use a context-resident working memory with long-term records in an external vector or structured store, but suffer from attentional dilution within the context window."
+        ],
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "item": "Bringing Trust to AI: kama.ai Introduces GenAI’s Sober Second Mind® and Knowledge Administrator",
+        "cells": [
+          "Hybrid AI agents blend LLM generative responses with knowledge-graph-backed curated knowledge, enabling human-governed delivery alongside real-time generation."
+        ],
+        "source_ids": [
+          "S5"
+        ]
+      },
+      {
+        "item": "Memory for Autonomous LLM Agents:Mechanisms, Evaluation, and Emerging Frontiers",
+        "cells": [
+          "Forgetting policies are under-evaluated; only MemoryAgentBench tests selective forgetting explicitly, and inability to discard outdated information gradually poisons retrieval precision."
+        ],
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "assumptions": [
+    "Benchmarks cited (Mem0, MemoryAgentBench) are vendor-reported or limited-scope; independent reproduction not verified.",
+    "Privacy controls depend on specific deployment (self-hosted vs managed) and are not fully detailed in sources.",
+    "Cost figures (90% token reduction, <2s latency) come from Mem0 benchmarks via Valkey blog; real-world variance expected.",
+    "Focus is on LLM-driven support agents (not rule-based bots).",
+    "Evidence limited to publicly available documentation, blog posts, and papers up to 2026-10-30.",
+    "Maximum of 6 fetched pages across all sub-questions."
+  ],
+  "limitations": [
+    "Sources do not provide head-to-head latency/cost numbers across all four architectures under identical workloads.",
+    "Forgetting/eviction policies are noted as under-evaluated; no quantitative comparison available.",
+    "Privacy and security details are mentioned but not specified per architecture.",
+    "Evidence context was shortened to fit the model token budget; some source detail was omitted.",
+    "The model judge flagged and removed 2 claim(s) not adequately supported by their cited evidence.",
+    "Fetched evidence was truncated to the configured character budget; later context may be missing.",
+    "Some sources were unavailable as full pages; search snippets were used where sufficient.",
+    "Dropped 6 sources: evidence_budget, low_quality_or_relevance, near_duplicate_text."
+  ],
+  "suggested_next_steps": [
+    "Run controlled benchmarks comparing vector, episodic, graph, and hybrid stores on representative support-agent workloads (multi-turn, policy-constrained, long-horizon).",
+    "Evaluate forgetting/eviction strategies (TTL, importance scoring, human-in-the-loop) with MemoryAgentBench or custom evals.",
+    "Map data-governance requirements (PII, access control, audit) to each architecture's native controls and supplement with infrastructure-level controls.",
+    "Prototype hybrid retrieval (vector + graph + episodic) for a high-value support use case and measure integration effort vs. reasoning quality gains."
+  ],
+  "user_question": "Compare approaches to adding memory in an AI support agent.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Vector Database vs Knowledge Graph: Choosing for Agent Memory",
+      "url": "https://atlan.com/know/vector-database-vs-knowledge-graph-agent-memory",
+      "domain": "atlan.com",
+      "quality_score": 0.745,
+      "retrieved_at": "2026-10-30T03:53:18.799329Z",
+      "provenance": "page"
+    },
+    {
+      "id": "S2",
+      "title": "Agent Memory Architectures: Vector vs Graph vs Episodic",
+      "url": "https://www.digitalapplied.com/blog/agent-memory-architectures-vector-graph-episodic",
+      "domain": "www.digitalapplied.com",
+      "quality_score": 0.675,
+      "retrieved_at": "2026-10-30T03:53:18.942902Z",
+      "provenance": "page"
+    },
+    {
+      "id": "S4",
+      "title": "Memory for Autonomous LLM Agents:Mechanisms, Evaluation, and Emerging Frontiers",
+      "url": "https://arxiv.org/html/2603.07670v1",
+      "domain": "arxiv.org",
+      "quality_score": 0.64,
+      "retrieved_at": "2026-10-30T03:53:22.661870Z",
+      "provenance": "snippet"
+    },
+    {
+      "id": "S5",
+      "title": "Bringing Trust to AI: kama.ai Introduces GenAI’s Sober Second Mind® and Knowledge Administrator",
+      "url": "https://finance.yahoo.com/news/bringing-trust-ai-kama-ai-170100880.html",
+      "domain": "finance.yahoo.com",
+      "quality_score": 0.605,
+      "retrieved_at": "2026-10-30T03:53:18.181272Z",
+      "provenance": "snippet"
+    }
+  ],
+  "confidence": {
+    "level": "high",
+    "score": 0.8687,
+    "factors": {
+      "independent_sources": 1.0,
+      "quality": 0.66625,
+      "grounding": 1.0,
+      "agreement_proxy": 0.5,
+      "judge": 0.7875,
+      "tool_health": 0.9,
+      "gap_coverage": 1.0
+    }
+  },
+  "meta": {
+    "trace_id": "d638b87e478941ea83c41195c6fcf32b",
+    "mode": "live",
+    "latency_s": 65.6106,
+    "tool_calls": 10,
+    "tokens": 12543,
+    "token_upper_bound_reserved": 12543,
+    "est_cost_usd": null,
+    "models": [
+      "nvidia/nemotron-3-ultra-550b-a55b"
+    ],
+    "plan_summary": "What are the main architectural approaches for adding memory to an AI support agent, and how do they compare across dimensions such as retention scope, retrieval mechanism, implementation complexity, and suitability for customer-support workflows?",
+    "dropped_sources_count": 6,
+    "grounding_rate": 1.0,
+    "judge_score": 0.7875,
+    "tool_failure_rate": 0.1,
+    "partial": false,
+    "status": "completed",
+    "stage_latency_s": {
+      "understand": 0.000754,
+      "plan": 12.69399,
+      "execute": 6.317436,
+      "filter": 0.061636,
+      "synthesize": 40.998492,
+      "verify": 0.005159,
+      "judge": 5.527308,
+      "confidence": 0.000857
+    }
+  }
+}

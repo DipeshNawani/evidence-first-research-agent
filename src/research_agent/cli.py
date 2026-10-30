@@ -28,6 +28,29 @@ def configure_console() -> None:
 
 
 @app.command()
+def demo(
+    port: Annotated[
+        int, typer.Option(min=1, max=65535, help="Loopback port for the local homepage.")
+    ] = 8000,
+    mock: Annotated[
+        bool, typer.Option(help="Start with offline fixtures; no API keys needed.")
+    ] = False,
+    no_browser: Annotated[
+        bool, typer.Option(help="Start the server without opening a browser.")
+    ] = False,
+) -> None:
+    """Start the local research page and open it automatically."""
+    from research_agent.demo import launch_demo
+
+    configure_console()
+    try:
+        launch_demo(Settings(), port=port, mock=mock, open_browser=not no_browser)
+    except (OSError, RuntimeError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from None
+
+
+@app.command()
 def research(
     question: str,
     mock: Annotated[bool, typer.Option(help="Force offline fixtures.")] = False,

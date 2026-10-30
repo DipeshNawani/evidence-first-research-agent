@@ -44,7 +44,6 @@
   ],
   "comparison_table": null,
   "assumptions": [
-    "Authored mock corpus; observations are not independently researched facts.",
     "Offline fixture run; these are authored examples, not current web research."
   ],
   "limitations": [
@@ -62,7 +61,7 @@
       "url": "https://darwinbox.com/",
       "domain": "darwinbox.com",
       "quality_score": 0.6679,
-      "retrieved_at": "2026-10-29T16:33:54.392576Z",
+      "retrieved_at": "2026-10-30T04:14:32.805108Z",
       "provenance": "fixture"
     },
     {
@@ -71,7 +70,7 @@
       "url": "https://www.keka.com/",
       "domain": "www.keka.com",
       "quality_score": 0.6436,
-      "retrieved_at": "2026-10-29T16:33:54.394032Z",
+      "retrieved_at": "2026-10-30T04:14:32.806380Z",
       "provenance": "fixture"
     },
     {
@@ -80,7 +79,7 @@
       "url": "https://hrone.cloud/",
       "domain": "hrone.cloud",
       "quality_score": 0.6414,
-      "retrieved_at": "2026-10-29T16:33:54.395611Z",
+      "retrieved_at": "2026-10-30T04:14:32.807529Z",
       "provenance": "fixture"
     },
     {
@@ -89,7 +88,7 @@
       "url": "https://www.zimyo.com/",
       "domain": "www.zimyo.com",
       "quality_score": 0.6386,
-      "retrieved_at": "2026-10-29T16:33:54.396888Z",
+      "retrieved_at": "2026-10-30T04:14:32.808735Z",
       "provenance": "fixture"
     },
     {
@@ -98,7 +97,7 @@
       "url": "https://www.greythr.com/",
       "domain": "www.greythr.com",
       "quality_score": 0.5943,
-      "retrieved_at": "2026-10-29T16:33:54.398198Z",
+      "retrieved_at": "2026-10-30T04:14:32.810564Z",
       "provenance": "fixture"
     }
   ],
@@ -116,12 +115,12 @@
     }
   },
   "meta": {
-    "trace_id": "e9147754ca1141f8ab078d7ba6e1b50c",
+    "trace_id": "b256aee83771444396f1bf5ad5846e6f",
     "mode": "mock",
-    "latency_s": 0.1399,
+    "latency_s": 0.0638,
     "tool_calls": 7,
-    "tokens": 2526,
-    "token_upper_bound_reserved": 23194,
+    "tokens": 2740,
+    "token_upper_bound_reserved": 2740,
     "est_cost_usd": 0.0,
     "models": [
       "mock-extractive-v1"
@@ -134,14 +133,14 @@
     "partial": false,
     "status": "completed",
     "stage_latency_s": {
-      "understand": 0.000469,
-      "plan": 0.00608,
-      "execute": 0.016574,
-      "filter": 0.101619,
-      "synthesize": 0.006478,
-      "verify": 0.001528,
-      "judge": 0.00258,
-      "confidence": 0.000869
+      "understand": 0.000444,
+      "plan": 0.019514,
+      "execute": 0.014879,
+      "filter": 0.0048,
+      "synthesize": 0.011433,
+      "verify": 0.001754,
+      "judge": 0.005268,
+      "confidence": 0.000897
     }
   }
 }

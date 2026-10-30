@@ -1,8 +1,10 @@
 # Submission checklist and handoff
 
-This is a local source repository for the AI Research Agent assignment. Start with [README.md](README.md), inspect [the orchestrator](src/research_agent/agent.py), then review [actual evaluation results](EVALUATION.md). The project is deliberately small: one planner/executor workflow, two tools, and a separate optional judge. No frontend or follow-up memory is included.
+This is a local source repository for the AI Research Agent assignment. Start with [README.md](README.md), inspect [the orchestrator](src/research_agent/agent.py), then review [actual evaluation results](EVALUATION.md). The project includes one planner/executor workflow, two tools, a separate optional judge, and a minimal homepage served by the existing FastAPI backend. Follow-up conversation memory is outside this implementation.
 
 ## Commands
+
+For the approved browser demonstration, run `.\.venv\Scripts\python.exe -m research_agent.cli demo` from the repository root. It opens the homepage automatically. Use `demo --mock --port 8001` for an isolated offline demo. The updated recording walkthrough is in `DEMO_SCRIPT.md`.
 
 After installing `.[dev]` into an activated Python 3.11+ virtual environment:
 
@@ -27,6 +29,7 @@ Windows without activation: `.\.venv\Scripts\make.exe test PYTHON=.venv/Scripts/
 | Handwritten planner/executor; no LangChain/LangGraph | `pipeline/executor.py`, `agent.py`; rationale in README Q1/Q7 |
 | Python 3.11+, Pydantic v2, async HTTP, pytest, Ruff, Make | `pyproject.toml`, `uv.lock`, `Makefile`, `.env.example`, `.gitignore` |
 | OpenAI default live integration, Claude alternative, protocol | `llm/base.py`, `openai_client.py`, `anthropic_client.py`, `runtime.py`; mock is safe execution default |
+| NVIDIA-hosted Nemotron alternative | `llm/nvidia_client.py`, `RA_NVIDIA_*` settings, `tests/test_nvidia.py`; JSON mode with local schema validation |
 | Native structured outputs; local validation and repair | `llm/gateway.py`, provider schema adapters, `tests/test_providers.py` |
 | Offline model/search/page fixtures | `llm/mock.py`, `fixtures.py`, `MockSearch`, `MockFetch`; no keys needed |
 | Plan fields, question types, criteria, assumptions, stop condition | `schemas.Plan`, `SearchStep`, `pipeline/planner.py` |
@@ -37,6 +40,7 @@ Windows without activation: `.\.venv\Scripts\make.exe test PYTHON=.venv/Scripts/
 | Provider/tool circuits and retry/fallback accounting | `Resilience`, `WebSearch`, `Budget`; traces and tests |
 | Malformed/empty output becomes a recorded gap | `Executor`, tool result schemas, collection gap events |
 | At most one adaptive gap round | `pipeline/collector.py`, `Settings.max_rounds <= 2` |
+| Live-run regressions: fast dedupe, context packing, quote repair | `pipeline/context.py`, `filter.py`, `review.py`, `tests/test_live_regressions.py`; NVIDIA smoke report |
 | Relevance/domain/recency/length scoring | `pipeline/filter.py:score_source`; weights and caveats in README |
 | URL and near-text deduplication; drop reasons | `pipeline/filter.py`, `DroppedSource`, trace events |
 | HTML extraction and bounded text | `FetchPage`, trafilatura, `evidence_chars`, byte/redirect/type limits |
@@ -66,13 +70,13 @@ Windows without activation: `.\.venv\Scripts\make.exe test PYTHON=.venv/Scripts/
 
 ## Verification
 
-The build was verified on Windows with Python 3.13.15. `make test` passed **61 tests**; `make lint`, `make eval`, and `make demo` ran successfully. Static analysis with `npx --yes pyright` reported no errors. The mock evaluation produced **24 valid final outputs**, agent checks **10/12**, baseline checks **4/12**. Two semantic-completeness checks fail for the intentionally first-sentence extractive mock; see EVALUATION.md. The suite currently emits one third-party Starlette/httpx deprecation warning.
+The build was verified on Windows with Python 3.13.15. The expanded offline suite passes **88 tests**. Ruff and Pyright checks pass. The mock evaluation produces **24 valid final outputs**, agent checks **10/12**, baseline checks **4/12**. Two semantic-completeness checks fail for the intentionally first-sentence extractive mock; see EVALUATION.md. The suite currently emits one third-party Starlette/httpx deprecation warning. Executed NVIDIA checks and their limitations are preserved in `eval/results/approved-upgrade/REPORT.md`.
 
-Additional clean-install and local HTTP smoke-check results are recorded in `VERIFICATION.md`. The source archive excludes credentials, virtual environments, ignored run traces, caches and temporary verification directories. Only the three explicitly selected redacted trace snapshots are included.
+Additional clean-install, browser and local HTTP smoke-check results are recorded in `VERIFICATION.md`. The source archive excludes credentials, virtual environments, ignored run traces, caches and temporary verification directories. It includes selected sample and live-check redacted trace snapshots.
 
 ## Assumptions and outstanding handoff
 
-- Offline fixtures are authored illustrations, not independently researched facts. All committed samples and evaluation numbers are mock executions. **Live provider integration was not exercised with credentials.** Native request shapes were checked against official provider docs and tested through mock HTTP transports.
+- Offline fixtures are authored illustrations, not independently researched facts. The `samples/` and `eval/results/mock/` artifacts are mock executions. Separate NVIDIA runs under `eval/results/nvidia-smoke/` and `eval/results/approved-upgrade/` exercise real credentials and document quality/latency limitations; they are not an accuracy benchmark.
 - Confidence is a documented heuristic, not a calibrated probability. Quote matching does not establish semantic entailment, truth, balance or source independence. The two failed quality probes demonstrate that distinction.
 - Comparisons publish a conservative supported-observation column; richer multi-criteria cell citations remain future work.
 - Security controls are meaningful but incomplete: heuristics can miss novel injection or unsafe intent, log redaction is not full DLP, and the API needs auth/admission control and an egress boundary before public exposure.
@@ -90,8 +94,9 @@ predictionaiproj/
   src/research_agent/
     agent.py, config.py, schemas.py, runtime.py, prompts.py
     budget.py, cache.py, resilience.py, tracing.py, baseline.py, fixtures.py
-    cli.py, api.py, renderer.py
-    llm/         base.py, gateway.py, openai_client.py, anthropic_client.py, mock.py
+    cli.py, api.py, renderer.py, demo.py
+    web/         index.html, style.css, app.js
+    llm/         base.py, gateway.py, openai_client.py, anthropic_client.py, nvidia_client.py, mock.py
     tools/       base.py, web_search.py, fetch_page.py
     safety/      injection.py, url_guard.py
     pipeline/    planner.py, executor.py, collector.py, filter.py, synthesizer.py

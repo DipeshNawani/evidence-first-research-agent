@@ -13,6 +13,7 @@ from research_agent.pipeline.confidence import compute_confidence
 from research_agent.pipeline.executor import Executor
 from research_agent.pipeline.planner import early_exit, make_plan
 from research_agent.pipeline.review import review
+from research_agent.pipeline.verifier import attribute_source_claims
 from research_agent.resilience import Resilience
 from research_agent.schemas import (
     AnswerDraft,
@@ -81,7 +82,11 @@ class ResearchAgent:
                 draft.limitations.append(
                     "Could not gather and synthesize verified evidence; no factual answer is established."
                 )
-            draft.assumptions = list(dict.fromkeys(draft.assumptions + plan.assumptions))
+            # Synthesis assumptions have no citation contract. Keep only the scope
+            # assumptions made before retrieval, so they cannot bypass verification.
+            draft.assumptions = list(dict.fromkeys(plan.assumptions))
+            if mode == "live" and draft.key_findings:
+                draft = attribute_source_claims(draft, collected.evidence)
             self.add_limitations(draft, collected, judgment)
         # CONFIDENCE + GUARD: deterministic and observable.
         failure_rate = self.failure_rate(executor, trace, budget)
@@ -178,4 +183,8 @@ class ResearchAgent:
         if judgment is None:
             draft.limitations.append(
                 "Independent model judge unavailable or disabled; confidence uses a conservative default."
+            )
+        elif judgment.score < 0.5:
+            draft.limitations.append(
+                "The model judge flagged low answer quality. Quote matches do not establish that every claim follows from its source; verify before use."
             )

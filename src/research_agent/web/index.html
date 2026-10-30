@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A bounded research agent with visible planning, source quotations and confidence checks.">
+  <title>Research Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">R</span> Research Agent</a><div class="topbar-right"><span id="connection" class="connection">Connecting…</span><a href="/docs" target="_blank" rel="noopener">API docs <span aria-hidden="true">↗</span></a></div></header>
+  <main>
+    <section class="intro"><p class="eyebrow">RESEARCH, WITH A PAPER TRAIL</p><h1>Ask a question. Follow the evidence.</h1><p class="lead">A clear plan, checked quotations, and an honest account of what the sources can tell us.</p></section>
+    <div class="workspace">
+      <section class="question-panel" aria-labelledby="question-heading">
+        <form id="research-form">
+          <h2 id="question-heading">What would you like to research?</h2>
+          <label class="sr-only" for="question">Research question</label>
+          <textarea id="question" name="question" rows="5" maxlength="4000" required placeholder="Compare approaches to adding memory in an AI support agent."></textarea>
+          <div class="examples" aria-label="Example questions"><button type="button" data-example="vector">Vector databases</button><button type="button" data-example="memory">Agent memory</button><button type="button" data-example="hr">Indian HR SaaS</button><button type="button" data-example="bio">A short biography</button></div>
+          <div class="form-bottom"><div><label for="execution-mode">Run mode</label><select id="execution-mode" name="mode"><option value="configured">Configured provider</option><option value="mock">Offline demo</option><option value="all_fail">Offline: search failure</option><option value="timeout">Offline: timeout + fallback</option><option value="injection">Offline: injection source</option></select></div><button id="run-button" class="primary" type="submit">Run research <span aria-hidden="true">→</span></button></div>
+          <p id="mode-note" class="fine-print">Live research uses the provider and keys configured on this computer.</p>
+        </form>
+        <div id="run-status" class="run-status" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><div><strong id="status-title">Research is running</strong><p id="status-detail">The plan, tool activity and timings will appear when the run completes.</p></div></div>
+        <div id="error-message" class="error-message" role="alert" hidden></div>
+      </section>
+      <aside class="how-panel"><p class="eyebrow">HOW A RUN WORKS</p><ol><li><span>01</span><div><strong>Plan the question</strong><p>A brief overview or a bounded research plan, depending on the request.</p></div></li><li><span>02</span><div><strong>Read and filter</strong><p>Search for sources, read useful pages, and record gaps and failures.</p></div></li><li><span>03</span><div><strong>Check the answer</strong><p>Match quotations to sources and flag weak or unsupported claims.</p></div></li></ol><p class="aside-note">A matching quotation proves where text came from. It does not, by itself, prove a claim is true.</p></aside>
+    </div>
+    <section id="results" class="results" aria-labelledby="result-heading" hidden>
+      <div class="result-heading"><div><p id="result-mode" class="eyebrow"></p><h2 id="result-heading">Research draft</h2></div><div class="export-actions"><a id="download-markdown" href="#" download>Save Markdown</a><a id="download-json" href="#" download>Save JSON</a></div></div>
+      <div id="result-warning" class="result-warning" role="status" hidden></div>
+      <div id="metrics" class="metrics"></div>
+      <div class="answer-layout"><div class="answer-main"><section class="answer-section"><h3>Short answer</h3><p id="short-answer" class="short-answer"></p></section><section id="findings-section" class="answer-section"><h3>Key findings</h3><div id="findings"></div></section><section id="comparison-section" class="answer-section" hidden><h3>Comparison</h3><div id="comparison" class="table-scroll"></div></section><section class="answer-section"><h3>Suggested next steps</h3><ul id="next-steps"></ul></section></div><aside class="answer-sidebar"><section class="answer-section"><h3>Sources used</h3><div id="sources"></div></section><details id="limitations-details" open><summary>Limitations</summary><ul id="limitations"></ul></details><details><summary>Assumptions</summary><ul id="assumptions"></ul></details></aside></div>
+      <details id="trace-details" class="trace-details"><summary>Plan &amp; tool activity <span id="trace-id"></span></summary><div id="plan"></div><div id="trace-timeline"></div></details>
+    </section>
+    <footer>Local research workspace <span>Bounded tools. Visible evidence. Human judgment.</span></footer>
+  </main>
+</body>
+</html>

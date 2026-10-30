@@ -8,7 +8,9 @@ import httpx
 from research_agent.agent import ResearchAgent
 from research_agent.config import Settings
 from research_agent.llm.anthropic_client import AnthropicClient
+from research_agent.llm.base import LLMClient
 from research_agent.llm.mock import MockLLM
+from research_agent.llm.nvidia_client import NvidiaClient
 from research_agent.llm.openai_client import OpenAIClient
 from research_agent.resilience import Resilience
 from research_agent.tools.base import ToolRegistry
@@ -26,24 +28,22 @@ async def build_agent(settings: Settings, scenario: str = "normal") -> AsyncIter
         follow_redirects=False,
     ) as http:
         if settings.llm_provider == "mock":
-            llm = MockLLM()
+            llm: LLMClient = MockLLM()
             search = MockSearch(settings, resilience, scenario)
             fetch = MockFetch(scenario)
         else:
-            secret = (
-                settings.openai_api_key
-                if settings.llm_provider == "openai"
-                else settings.anthropic_api_key
-            )
+            keys = {
+                "openai": settings.openai_api_key,
+                "anthropic": settings.anthropic_api_key,
+                "nvidia": settings.nvidia_api_key,
+            }
+            secret = keys[settings.llm_provider]
             if not secret.get_secret_value():
                 raise ValueError(
                     f"RA_{settings.llm_provider.upper()}_API_KEY is required for live mode"
                 )
-            llm = (
-                OpenAIClient(http, secret.get_secret_value())
-                if settings.llm_provider == "openai"
-                else AnthropicClient(http, secret.get_secret_value())
-            )
+            clients = {"openai": OpenAIClient, "anthropic": AnthropicClient, "nvidia": NvidiaClient}
+            llm = clients[settings.llm_provider](http, secret.get_secret_value())
             search = WebSearch(
                 [
                     Tavily(http, settings.tavily_api_key.get_secret_value()),

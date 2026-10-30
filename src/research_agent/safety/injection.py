@@ -2,9 +2,9 @@ import re
 
 PATTERNS = (
     r"ignore\s+(?:all\s+)?(?:previous|prior|above)\s+instructions",
-    r"system\s+prompt",
+    r"\b(?:reveal|expose|leak|print|output|show|send)\b[^\r\n<]{0,60}\b(?:system\s+prompt|hidden\s+instructions|api\s*key|secrets)\b",
     r"you\s+are\s+now",
-    r"(?:assistant|ai|language model)\s*[:,].*(?:must|ignore|execute)",
+    r"\b(?:assistant|ai|language model)\s*[:,]\s*(?:you\s+)?(?:must|ignore|execute|reveal|send|output)\b",
     r"[\u200b-\u200f\u202a-\u202e\u2060\ufeff]",
     r"</?untrusted",
     r"\[/?(?:SYSTEM|INST)\]",

@@ -61,7 +61,6 @@
     ]
   },
   "assumptions": [
-    "Authored mock corpus; observations are not independently researched facts.",
     "Offline fixture run; these are authored examples, not current web research."
   ],
   "limitations": [
@@ -79,7 +78,7 @@
       "url": "https://docs.weaviate.io/weaviate",
       "domain": "docs.weaviate.io",
       "quality_score": 0.8371,
-      "retrieved_at": "2026-10-29T16:33:52.614813Z",
+      "retrieved_at": "2026-10-30T04:14:32.122868Z",
       "provenance": "fixture"
     },
     {
@@ -88,7 +87,7 @@
       "url": "https://milvus.io/docs",
       "domain": "milvus.io",
       "quality_score": 0.74,
-      "retrieved_at": "2026-10-29T16:33:52.616568Z",
+      "retrieved_at": "2026-10-30T04:14:32.124234Z",
       "provenance": "fixture"
     },
     {
@@ -97,7 +96,7 @@
       "url": "https://qdrant.tech/documentation",
       "domain": "qdrant.tech",
       "quality_score": 0.6729,
-      "retrieved_at": "2026-10-29T16:33:52.617681Z",
+      "retrieved_at": "2026-10-30T04:14:32.125451Z",
       "provenance": "fixture"
     }
   ],
@@ -115,12 +114,12 @@
     }
   },
   "meta": {
-    "trace_id": "35ced655c8d0472da254d40c26d7118b",
+    "trace_id": "aaa4cb7529334ef583ee3080d6b6a456",
     "mode": "mock",
-    "latency_s": 0.1205,
+    "latency_s": 0.0366,
     "tool_calls": 5,
-    "tokens": 2000,
-    "token_upper_bound_reserved": 21265,
+    "tokens": 2166,
+    "token_upper_bound_reserved": 2166,
     "est_cost_usd": 0.0,
     "models": [
       "mock-extractive-v1"
@@ -133,14 +132,14 @@
     "partial": false,
     "status": "completed",
     "stage_latency_s": {
-      "understand": 0.002392,
-      "plan": 0.008707,
-      "execute": 0.018011,
-      "filter": 0.069207,
-      "synthesize": 0.008314,
-      "verify": 0.002005,
-      "judge": 0.005606,
-      "confidence": 0.001334
+      "understand": 0.001323,
+      "plan": 0.00596,
+      "execute": 0.01075,
+      "filter": 0.003519,
+      "synthesize": 0.005821,
+      "verify": 0.001269,
+      "judge": 0.003186,
+      "confidence": 0.001347
     }
   }
 }

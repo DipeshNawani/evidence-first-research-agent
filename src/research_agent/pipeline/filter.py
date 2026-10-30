@@ -1,8 +1,8 @@
 """Transparent ranking and duplicate filtering. Heuristics are not authority proof."""
 
+import hashlib
 import re
 from datetime import UTC, datetime
-from difflib import SequenceMatcher
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from research_agent.config import Settings
@@ -52,13 +52,36 @@ def words(text: str) -> set[str]:
     }
 
 
-def score_source(hit: SearchHit, text: str, question: str) -> float:
+def text_fingerprint(text: str) -> frozenset[str]:
+    """Bounded five-word shingle hashes avoid quadratic character alignment."""
+    tokens = re.findall(r"\w+", text[:2000].casefold())
+    windows = [" ".join(tokens[index : index + 5]) for index in range(max(1, len(tokens) - 4))]
+    return frozenset(
+        hashlib.blake2b(window.encode(), digest_size=8).hexdigest() for window in windows
+    )
+
+
+def near_duplicate(left: frozenset[str], right: frozenset[str]) -> bool:
+    return len(left & right) / max(1, len(left | right)) >= 0.85
+
+
+def score_source(
+    hit: SearchHit, text: str, question: str, settings: Settings | None = None
+) -> float:
     host = (urlsplit(hit.url).hostname or "").lower()
     terms = words(question)
     relevance = min(1.0, len(terms & words(hit.title + " " + text)) / max(1, min(len(terms), 7)))
     reputation = 0.55
+    config = settings or Settings(_env_file=None)
+    trusted = any(
+        host == domain or host.endswith("." + domain) for domain in config.trusted_source_domains
+    )
+    weak = any(
+        host == domain or host.endswith("." + domain) for domain in config.weak_source_domains
+    )
     if (
-        host == "github.com"
+        trusted
+        or host == "github.com"
         or host == "arxiv.org"
         or host.endswith((".gov", ".edu"))
         or host.startswith("docs.")
@@ -83,7 +106,9 @@ def score_source(hit: SearchHit, text: str, question: str) -> float:
     score = 0.35 * relevance + 0.30 * reputation + 0.25 * quality + 0.10 * recency
     if relevance < 0.12:
         score *= 0.3
-    return round(max(0, score - (0.55 if spam else 0)), 4)
+    seo = bool(re.search(r"\b(?:best|top)\s+(?:\d+|ai agents?|vector databases?)", hit.title, re.I))
+    penalty = (0.55 if spam else 0) + (0.35 if weak else 0) + (0.12 if seo and not trusted else 0)
+    return round(max(0, score - penalty), 4)
 
 
 def filter_sources(
@@ -96,8 +121,10 @@ def filter_sources(
     result = FilterResult()
     seen: dict[str, Evidence] = {}
     ranked: list[Evidence] = []
+    fingerprints: list[tuple[Evidence, frozenset[str]]] = []
     for hit, body, provenance, ids in candidates:
         reason = ""
+        fingerprint = text_fingerprint(body)
         try:
             url = canonical_url(hit.url)
         except ToolError:
@@ -108,15 +135,14 @@ def filter_sources(
         elif url in seen:
             seen[url].sub_question_ids = sorted(set(seen[url].sub_question_ids + ids))
             reason = "duplicate_url"
-        elif any(
-            SequenceMatcher(
-                None, body[:2000].lower(), e.text[:2000].lower(), autojunk=False
-            ).ratio()
-            > 0.90
-            for e in ranked
-        ):
-            reason = "near_duplicate_text"
-        score = score_source(hit, body, question)
+        else:
+            duplicate = next(
+                (e for e, previous in fingerprints if near_duplicate(fingerprint, previous)), None
+            )
+            if duplicate:
+                duplicate.sub_question_ids = sorted(set(duplicate.sub_question_ids + ids))
+                reason = "near_duplicate_text"
+        score = score_source(hit, body, question, settings)
         if not reason and (len(body.strip()) < 60 or score < settings.source_threshold):
             reason = "low_quality_or_relevance"
         if reason:
@@ -136,6 +162,7 @@ def filter_sources(
         )
         seen[url] = evidence
         ranked.append(evidence)
+        fingerprints.append((evidence, fingerprint))
     ranked.sort(key=lambda e: (-e.source.quality_score, e.source.url))
     for evidence in ranked[settings.max_evidence :]:
         result.dropped_sources.append(

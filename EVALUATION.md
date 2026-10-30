@@ -1,6 +1,6 @@
 # Evaluation: executed mock run
 
-Executed at **2026-10-29T16:34:06.770550+00:00**. Source of every number below: `eval/results/mock/results.json`. Reproduce with `python eval/run_eval.py --mock`; regenerate this narrative with `python scripts/write_eval_report.py`. Per-case metrics and full validated answers are committed. Nothing in this report is a live-model result.
+Executed at **2026-10-30T04:14:39.921291+00:00**. Source of every number below: `eval/results/mock/results.json`. Reproduce with `python eval/run_eval.py --mock`; regenerate this narrative with `python scripts/write_eval_report.py`. Per-case metrics and full validated answers are committed. Nothing in this report is a live-model result.
 
 ## Method and denominators
 
@@ -16,8 +16,8 @@ The mock is deliberately extractive: it copies the first sentence of each retain
 - Agent behavior checks: **10/12**; baseline: **4/12**. These are task/contract checks, not an accuracy score.
 - Agent answers with cited findings: **8/12**. Mean pre-removal grounding rate on that subset: **100%**. Mean retained verified-claim fraction: **100%**.
 - Mean source count across **all** agent cases: **2.17**. Mean of per-answer source quality over cited answers: **0.730** (heuristic, not an external rating).
-- Mean recorded agent run latency: **0.0779 seconds**; baseline **0.0058 seconds**. This excludes dependency construction/process startup and has no predictive value for live network/model latency.
-- Total synthetic reported tokens: agent **16962**, baseline **924**. Mock token counts use character estimates; they are not provider usage.
+- Mean recorded agent run latency: **0.0345 seconds**; baseline **0.0035 seconds**. This excludes dependency construction/process startup and has no predictive value for live network/model latency.
+- Total synthetic reported tokens: agent **18296**, baseline **924**. Mock token counts use character estimates; they are not provider usage.
 - Estimated model spend in this offline run: **$0**. Live estimates are unknown unless configured input/output rates are supplied; search and infrastructure billing are excluded.
 
 For every query's expected behavior, source count, grounding, judge value, latency, tokens and observed checks, see [the generated results table](eval/results/mock/summary.md). Tool failure and recovery metrics, every answer and failed-check details are in [the machine-readable results](eval/results/mock/results.json).
@@ -56,10 +56,10 @@ The offline pytest suite exercises actual cancellation, exponential retry classi
 
 ## Live run handoff (not executed)
 
-No live-provider keys were available. Set the provider and secrets in `.env`, then run:
+No live-provider keys were available during the initial mock evaluation. A separate [NVIDIA live integration check](eval/results/nvidia-smoke/REPORT.md) now records one real answered query and its quality limitations; the full live agent-versus-baseline harness remains unexecuted. Set the provider and secrets in `.env`, then run:
 
 ```sh
 python eval/run_eval.py --live
 ```
 
-Live results go to `eval/results/live/`; fixture fault cases are explicitly skipped. Keep `results.json` and `summary.md`, record provider/model IDs and configured pricing rates, and add a dated human assessment here. Required fields to fill after execution: live case count, schema/grounding outcomes, factual errors found, rubric scores, actual token usage, model/search spend, stage latency distributions, baseline comparison, and model/provider failure cases. **No live metrics are claimed in this submission.**
+Live results go to `eval/results/live/`; fixture fault cases are explicitly skipped. Keep `results.json` and `summary.md`, record provider/model IDs and configured pricing rates, and add a dated human assessment here. Required fields to fill after execution: live case count, schema/grounding outcomes, factual errors found, rubric scores, actual token usage, model/search spend, stage latency distributions, baseline comparison, and model/provider failure cases. **No full live-benchmark metrics are claimed in this mock evaluation.** The separate smoke report preserves one real integration run without presenting it as a benchmark.

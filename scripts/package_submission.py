@@ -18,7 +18,7 @@ FILES = [
     ".env.example",
     ".gitignore",
 ]
-DIRECTORIES = ["src", "tests", "eval", "samples", "scripts"]
+DIRECTORIES = ["src", "tests", "eval", "samples", "scripts", "docs"]
 
 
 def submission_files() -> list[Path]:

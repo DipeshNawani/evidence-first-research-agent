@@ -1,6 +1,6 @@
 {
   "mode": "mock",
-  "executed_at": "2026-10-29T16:34:06.770550+00:00",
+  "executed_at": "2026-10-30T04:14:39.921291+00:00",
   "skipped_fixture_cases": [],
   "rows": [
     {
@@ -29,8 +29,8 @@
         "avg_source_quality": 0.75,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.1205,
-        "tokens": 2000,
+        "latency_s": 0.0366,
+        "tokens": 2166,
         "est_cost_usd": 0.0,
         "tool_calls": 5,
         "tool_failure_rate": 0.0,
@@ -107,7 +107,6 @@
           ]
         },
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -125,7 +124,7 @@
             "url": "https://docs.weaviate.io/weaviate",
             "domain": "docs.weaviate.io",
             "quality_score": 0.8371,
-            "retrieved_at": "2026-10-29T16:33:52.614813Z",
+            "retrieved_at": "2026-10-30T04:14:32.122868Z",
             "provenance": "fixture"
           },
           {
@@ -134,7 +133,7 @@
             "url": "https://milvus.io/docs",
             "domain": "milvus.io",
             "quality_score": 0.74,
-            "retrieved_at": "2026-10-29T16:33:52.616568Z",
+            "retrieved_at": "2026-10-30T04:14:32.124234Z",
             "provenance": "fixture"
           },
           {
@@ -143,7 +142,7 @@
             "url": "https://qdrant.tech/documentation",
             "domain": "qdrant.tech",
             "quality_score": 0.6729,
-            "retrieved_at": "2026-10-29T16:33:52.617681Z",
+            "retrieved_at": "2026-10-30T04:14:32.125451Z",
             "provenance": "fixture"
           }
         ],
@@ -161,12 +160,12 @@
           }
         },
         "meta": {
-          "trace_id": "35ced655c8d0472da254d40c26d7118b",
+          "trace_id": "aaa4cb7529334ef583ee3080d6b6a456",
           "mode": "mock",
-          "latency_s": 0.1205,
+          "latency_s": 0.0366,
           "tool_calls": 5,
-          "tokens": 2000,
-          "token_upper_bound_reserved": 21265,
+          "tokens": 2166,
+          "token_upper_bound_reserved": 2166,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -179,14 +178,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.002392,
-            "plan": 0.008707,
-            "execute": 0.018011,
-            "filter": 0.069207,
-            "synthesize": 0.008314,
-            "verify": 0.002005,
-            "judge": 0.005606,
-            "confidence": 0.001334
+            "understand": 0.001323,
+            "plan": 0.00596,
+            "execute": 0.01075,
+            "filter": 0.003519,
+            "synthesize": 0.005821,
+            "verify": 0.001269,
+            "judge": 0.003186,
+            "confidence": 0.001347
           }
         }
       }
@@ -217,7 +216,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0056,
+        "latency_s": 0.0029,
         "tokens": 103,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -254,12 +253,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "c26b531439644768be4b3f1609138917",
+          "trace_id": "0aa0a92a178847d0bda06a65d6ffb4f3",
           "mode": "mock",
-          "latency_s": 0.0056,
+          "latency_s": 0.0029,
           "tool_calls": 0,
           "tokens": 103,
-          "token_upper_bound_reserved": 5791,
+          "token_upper_bound_reserved": 103,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -300,8 +299,8 @@
         "avg_source_quality": 0.63716,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.1399,
-        "tokens": 2526,
+        "latency_s": 0.0638,
+        "tokens": 2740,
         "est_cost_usd": 0.0,
         "tool_calls": 7,
         "tool_failure_rate": 0.0,
@@ -360,7 +359,6 @@
         ],
         "comparison_table": null,
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -378,7 +376,7 @@
             "url": "https://darwinbox.com/",
             "domain": "darwinbox.com",
             "quality_score": 0.6679,
-            "retrieved_at": "2026-10-29T16:33:54.392576Z",
+            "retrieved_at": "2026-10-30T04:14:32.805108Z",
             "provenance": "fixture"
           },
           {
@@ -387,7 +385,7 @@
             "url": "https://www.keka.com/",
             "domain": "www.keka.com",
             "quality_score": 0.6436,
-            "retrieved_at": "2026-10-29T16:33:54.394032Z",
+            "retrieved_at": "2026-10-30T04:14:32.806380Z",
             "provenance": "fixture"
           },
           {
@@ -396,7 +394,7 @@
             "url": "https://hrone.cloud/",
             "domain": "hrone.cloud",
             "quality_score": 0.6414,
-            "retrieved_at": "2026-10-29T16:33:54.395611Z",
+            "retrieved_at": "2026-10-30T04:14:32.807529Z",
             "provenance": "fixture"
           },
           {
@@ -405,7 +403,7 @@
             "url": "https://www.zimyo.com/",
             "domain": "www.zimyo.com",
             "quality_score": 0.6386,
-            "retrieved_at": "2026-10-29T16:33:54.396888Z",
+            "retrieved_at": "2026-10-30T04:14:32.808735Z",
             "provenance": "fixture"
           },
           {
@@ -414,7 +412,7 @@
             "url": "https://www.greythr.com/",
             "domain": "www.greythr.com",
             "quality_score": 0.5943,
-            "retrieved_at": "2026-10-29T16:33:54.398198Z",
+            "retrieved_at": "2026-10-30T04:14:32.810564Z",
             "provenance": "fixture"
           }
         ],
@@ -432,12 +430,12 @@
           }
         },
         "meta": {
-          "trace_id": "e9147754ca1141f8ab078d7ba6e1b50c",
+          "trace_id": "b256aee83771444396f1bf5ad5846e6f",
           "mode": "mock",
-          "latency_s": 0.1399,
+          "latency_s": 0.0638,
           "tool_calls": 7,
-          "tokens": 2526,
-          "token_upper_bound_reserved": 23194,
+          "tokens": 2740,
+          "token_upper_bound_reserved": 2740,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -450,14 +448,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.000469,
-            "plan": 0.00608,
-            "execute": 0.016574,
-            "filter": 0.101619,
-            "synthesize": 0.006478,
-            "verify": 0.001528,
-            "judge": 0.00258,
-            "confidence": 0.000869
+            "understand": 0.000444,
+            "plan": 0.019514,
+            "execute": 0.014879,
+            "filter": 0.0048,
+            "synthesize": 0.011433,
+            "verify": 0.001754,
+            "judge": 0.005268,
+            "confidence": 0.000897
           }
         }
       }
@@ -487,7 +485,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0069,
+        "latency_s": 0.0046,
         "tokens": 101,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -523,12 +521,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "36917f8509984fb393124a55ac62724c",
+          "trace_id": "6be928079d7e4480b552b0a93d952d1e",
           "mode": "mock",
-          "latency_s": 0.0069,
+          "latency_s": 0.0046,
           "tool_calls": 0,
           "tokens": 101,
-          "token_upper_bound_reserved": 5783,
+          "token_upper_bound_reserved": 101,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -568,8 +566,8 @@
         "avg_source_quality": 0.7914333333333333,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.0892,
-        "tokens": 1998,
+        "latency_s": 0.0442,
+        "tokens": 2143,
         "est_cost_usd": 0.0,
         "tool_calls": 5,
         "tool_failure_rate": 0.0,
@@ -612,7 +610,6 @@
         ],
         "comparison_table": null,
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -630,7 +627,7 @@
             "url": "https://github.com/example/support-workflow",
             "domain": "github.com",
             "quality_score": 0.8164,
-            "retrieved_at": "2026-10-29T16:33:55.566172Z",
+            "retrieved_at": "2026-10-30T04:14:33.502440Z",
             "provenance": "fixture"
           },
           {
@@ -639,7 +636,7 @@
             "url": "https://arxiv.org/abs/2401.00001",
             "domain": "arxiv.org",
             "quality_score": 0.7793,
-            "retrieved_at": "2026-10-29T16:33:55.567727Z",
+            "retrieved_at": "2026-10-30T04:14:33.504162Z",
             "provenance": "fixture"
           },
           {
@@ -648,7 +645,7 @@
             "url": "https://docs.example.org/multi-agent",
             "domain": "docs.example.org",
             "quality_score": 0.7786,
-            "retrieved_at": "2026-10-29T16:33:55.568977Z",
+            "retrieved_at": "2026-10-30T04:14:33.505522Z",
             "provenance": "fixture"
           }
         ],
@@ -666,12 +663,12 @@
           }
         },
         "meta": {
-          "trace_id": "4e0c2c0299d84aa99f8f70788324c34c",
+          "trace_id": "f95a2c418e3a4ae084fd48586bfdcf92",
           "mode": "mock",
-          "latency_s": 0.0892,
+          "latency_s": 0.0442,
           "tool_calls": 5,
-          "tokens": 1998,
-          "token_upper_bound_reserved": 21293,
+          "tokens": 2143,
+          "token_upper_bound_reserved": 2143,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -684,14 +681,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.000393,
-            "plan": 0.017655,
-            "execute": 0.010068,
-            "filter": 0.047541,
-            "synthesize": 0.006539,
-            "verify": 0.000996,
-            "judge": 0.001996,
-            "confidence": 0.00081
+            "understand": 0.000469,
+            "plan": 0.005775,
+            "execute": 0.010867,
+            "filter": 0.004499,
+            "synthesize": 0.010851,
+            "verify": 0.002096,
+            "judge": 0.004649,
+            "confidence": 0.000955
           }
         }
       }
@@ -720,7 +717,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0055,
+        "latency_s": 0.0056,
         "tokens": 106,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -756,12 +753,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "d4607c8d59f6409db6f768e0cc6206df",
+          "trace_id": "352b9634d08a4340bc40726f3e7d020b",
           "mode": "mock",
-          "latency_s": 0.0055,
+          "latency_s": 0.0056,
           "tool_calls": 0,
           "tokens": 106,
-          "token_upper_bound_reserved": 5803,
+          "token_upper_bound_reserved": 106,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -802,8 +799,8 @@
         "avg_source_quality": 0.7309666666666667,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.0721,
-        "tokens": 2152,
+        "latency_s": 0.0433,
+        "tokens": 2294,
         "est_cost_usd": 0.0,
         "tool_calls": 5,
         "tool_failure_rate": 0.0,
@@ -880,7 +877,6 @@
           ]
         },
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -898,7 +894,7 @@
             "url": "https://github.com/example/summary-memory",
             "domain": "github.com",
             "quality_score": 0.8,
-            "retrieved_at": "2026-10-29T16:33:56.613931Z",
+            "retrieved_at": "2026-10-30T04:14:34.288138Z",
             "provenance": "fixture"
           },
           {
@@ -907,7 +903,7 @@
             "url": "https://docs.example.org/context-memory",
             "domain": "docs.example.org",
             "quality_score": 0.7279,
-            "retrieved_at": "2026-10-29T16:33:56.615411Z",
+            "retrieved_at": "2026-10-30T04:14:34.289619Z",
             "provenance": "fixture"
           },
           {
@@ -916,7 +912,7 @@
             "url": "https://arxiv.org/abs/2402.00002",
             "domain": "arxiv.org",
             "quality_score": 0.665,
-            "retrieved_at": "2026-10-29T16:33:56.616714Z",
+            "retrieved_at": "2026-10-30T04:14:34.290951Z",
             "provenance": "fixture"
           }
         ],
@@ -934,12 +930,12 @@
           }
         },
         "meta": {
-          "trace_id": "48d71c872470463aa3c0375755cd854a",
+          "trace_id": "98ec1c2ecc7147ae8b3753f7732f3cb7",
           "mode": "mock",
-          "latency_s": 0.0721,
+          "latency_s": 0.0433,
           "tool_calls": 5,
-          "tokens": 2152,
-          "token_upper_bound_reserved": 21593,
+          "tokens": 2294,
+          "token_upper_bound_reserved": 2294,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -952,14 +948,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.000399,
-            "plan": 0.006797,
-            "execute": 0.009518,
-            "filter": 0.039961,
-            "synthesize": 0.006326,
-            "verify": 0.001326,
-            "judge": 0.002937,
-            "confidence": 0.001197
+            "understand": 0.000505,
+            "plan": 0.007464,
+            "execute": 0.009135,
+            "filter": 0.005118,
+            "synthesize": 0.009468,
+            "verify": 0.001403,
+            "judge": 0.004839,
+            "confidence": 0.001449
           }
         }
       }
@@ -989,7 +985,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.008,
+        "latency_s": 0.0035,
         "tokens": 100,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -1026,12 +1022,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "9780864a9c434b18b296e8dffa2932e1",
+          "trace_id": "f61cda2854f0426198f26a6a7675d24d",
           "mode": "mock",
-          "latency_s": 0.008,
+          "latency_s": 0.0035,
           "tool_calls": 0,
           "tokens": 100,
-          "token_upper_bound_reserved": 5777,
+          "token_upper_bound_reserved": 100,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -1070,7 +1066,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0036,
+        "latency_s": 0.0028,
         "tokens": 0,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -1108,9 +1104,9 @@
           }
         },
         "meta": {
-          "trace_id": "2e094614d5954824b747ad937db00da4",
+          "trace_id": "11ba593e136b458786fdec4d649aec0e",
           "mode": "mock",
-          "latency_s": 0.0036,
+          "latency_s": 0.0028,
           "tool_calls": 0,
           "tokens": 0,
           "token_upper_bound_reserved": 0,
@@ -1124,8 +1120,8 @@
           "partial": false,
           "status": "needs_clarification",
           "stage_latency_s": {
-            "understand": 0.000416,
-            "confidence": 0.001622
+            "understand": 0.000388,
+            "confidence": 0.001121
           }
         }
       }
@@ -1183,7 +1179,7 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "253743c82ce8487090e54b33ec491cba",
+          "trace_id": "507408725ea949c3b3666ff18a0b8e08",
           "mode": "mock",
           "latency_s": 0.0001,
           "tool_calls": 0,
@@ -1226,7 +1222,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0029,
+        "latency_s": 0.0037,
         "tokens": 0,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -1265,9 +1261,9 @@
           }
         },
         "meta": {
-          "trace_id": "f96ef53df6fe43d987323420381a3cb9",
+          "trace_id": "3c5e3d11c1a44e8ab0482d9776396266",
           "mode": "mock",
-          "latency_s": 0.0029,
+          "latency_s": 0.0037,
           "tool_calls": 0,
           "tokens": 0,
           "token_upper_bound_reserved": 0,
@@ -1281,8 +1277,8 @@
           "partial": false,
           "status": "insufficient_evidence",
           "stage_latency_s": {
-            "understand": 0.000398,
-            "confidence": 0.00109
+            "understand": 0.000501,
+            "confidence": 0.001183
           }
         }
       }
@@ -1311,7 +1307,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0003,
+        "latency_s": 0.0001,
         "tokens": 0,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -1342,9 +1338,9 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "ce9f49ef414548be995ffb784355d61f",
+          "trace_id": "79392618d7514a11bff7049387821903",
           "mode": "mock",
-          "latency_s": 0.0003,
+          "latency_s": 0.0001,
           "tool_calls": 0,
           "tokens": 0,
           "token_upper_bound_reserved": 0,
@@ -1384,8 +1380,8 @@
         "avg_source_quality": 0.7,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.0697,
-        "tokens": 1999,
+        "latency_s": 0.0459,
+        "tokens": 2147,
         "est_cost_usd": 0.0,
         "tool_calls": 5,
         "tool_failure_rate": 0.0,
@@ -1460,7 +1456,6 @@
           ]
         },
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -1480,7 +1475,7 @@
             "url": "https://qdrant.tech/documentation",
             "domain": "qdrant.tech",
             "quality_score": 0.7229,
-            "retrieved_at": "2026-10-29T16:33:59.029141Z",
+            "retrieved_at": "2026-10-30T04:14:36.319758Z",
             "provenance": "fixture"
           },
           {
@@ -1489,7 +1484,7 @@
             "url": "https://milvus.io/docs",
             "domain": "milvus.io",
             "quality_score": 0.69,
-            "retrieved_at": "2026-10-29T16:33:59.030568Z",
+            "retrieved_at": "2026-10-30T04:14:36.321110Z",
             "provenance": "fixture"
           },
           {
@@ -1498,7 +1493,7 @@
             "url": "https://docs.weaviate.io/weaviate",
             "domain": "docs.weaviate.io",
             "quality_score": 0.6871,
-            "retrieved_at": "2026-10-29T16:33:59.032195Z",
+            "retrieved_at": "2026-10-30T04:14:36.322299Z",
             "provenance": "fixture"
           }
         ],
@@ -1516,12 +1511,12 @@
           }
         },
         "meta": {
-          "trace_id": "c2ff383c9db04ee2bdf37162fb0bc2e0",
+          "trace_id": "4672cf58e1d74d3aa863b08a01cde058",
           "mode": "mock",
-          "latency_s": 0.0697,
+          "latency_s": 0.0459,
           "tool_calls": 5,
-          "tokens": 1999,
-          "token_upper_bound_reserved": 21263,
+          "tokens": 2147,
+          "token_upper_bound_reserved": 2147,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -1534,14 +1529,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.000524,
-            "plan": 0.006726,
-            "execute": 0.016158,
-            "filter": 0.033922,
-            "synthesize": 0.005492,
-            "verify": 0.000801,
-            "judge": 0.002254,
-            "confidence": 0.000622
+            "understand": 0.000522,
+            "plan": 0.007427,
+            "execute": 0.01034,
+            "filter": 0.005864,
+            "synthesize": 0.011055,
+            "verify": 0.001394,
+            "judge": 0.004163,
+            "confidence": 0.000978
           }
         }
       }
@@ -1569,7 +1564,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0048,
+        "latency_s": 0.005,
         "tokens": 103,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -1604,12 +1599,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "ea29ea11a8a447f5b9f341f5a656d682",
+          "trace_id": "50fc5359068d4cf8a02ebd873b76f24a",
           "mode": "mock",
-          "latency_s": 0.0048,
+          "latency_s": 0.005,
           "tool_calls": 0,
           "tokens": 103,
-          "token_upper_bound_reserved": 5790,
+          "token_upper_bound_reserved": 103,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -1648,8 +1643,8 @@
         "avg_source_quality": 0.75,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.0616,
-        "tokens": 1986,
+        "latency_s": 0.0467,
+        "tokens": 2150,
         "est_cost_usd": 0.0,
         "tool_calls": 5,
         "tool_failure_rate": 0.0,
@@ -1724,7 +1719,6 @@
           ]
         },
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -1743,7 +1737,7 @@
             "url": "https://docs.weaviate.io/weaviate",
             "domain": "docs.weaviate.io",
             "quality_score": 0.8371,
-            "retrieved_at": "2026-10-29T16:34:00.736052Z",
+            "retrieved_at": "2026-10-30T04:14:36.970621Z",
             "provenance": "fixture"
           },
           {
@@ -1752,7 +1746,7 @@
             "url": "https://milvus.io/docs",
             "domain": "milvus.io",
             "quality_score": 0.74,
-            "retrieved_at": "2026-10-29T16:34:00.737344Z",
+            "retrieved_at": "2026-10-30T04:14:36.972035Z",
             "provenance": "fixture"
           },
           {
@@ -1761,7 +1755,7 @@
             "url": "https://qdrant.tech/documentation",
             "domain": "qdrant.tech",
             "quality_score": 0.6729,
-            "retrieved_at": "2026-10-29T16:34:00.738571Z",
+            "retrieved_at": "2026-10-30T04:14:36.973388Z",
             "provenance": "fixture"
           }
         ],
@@ -1779,12 +1773,12 @@
           }
         },
         "meta": {
-          "trace_id": "5a976c2d520c47539a84b175aea88a65",
+          "trace_id": "e16d80d1f68e48fa9ed76f803690fe9a",
           "mode": "mock",
-          "latency_s": 0.0616,
+          "latency_s": 0.0467,
           "tool_calls": 5,
-          "tokens": 1986,
-          "token_upper_bound_reserved": 21245,
+          "tokens": 2150,
+          "token_upper_bound_reserved": 2150,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -1797,14 +1791,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.000405,
-            "plan": 0.003967,
-            "execute": 0.009374,
-            "filter": 0.021408,
-            "synthesize": 0.010276,
-            "verify": 0.002527,
-            "judge": 0.005945,
-            "confidence": 0.003017
+            "understand": 0.000503,
+            "plan": 0.012825,
+            "execute": 0.012009,
+            "filter": 0.005228,
+            "synthesize": 0.005852,
+            "verify": 0.001531,
+            "judge": 0.003974,
+            "confidence": 0.001093
           }
         }
       }
@@ -1832,7 +1826,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0104,
+        "latency_s": 0.0037,
         "tokens": 101,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -1867,12 +1861,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "83f1174d1de84d3a959fad0a551f68b7",
+          "trace_id": "1475c95980cd4f32983f56f23a9fcfac",
           "mode": "mock",
-          "latency_s": 0.0104,
+          "latency_s": 0.0037,
           "tool_calls": 0,
           "tokens": 101,
-          "token_upper_bound_reserved": 5781,
+          "token_upper_bound_reserved": 101,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -1911,8 +1905,8 @@
         "avg_source_quality": 0.75,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.0452,
-        "tokens": 1993,
+        "latency_s": 0.0449,
+        "tokens": 2152,
         "est_cost_usd": 0.0,
         "tool_calls": 9,
         "tool_failure_rate": 0.4444444444444444,
@@ -1987,7 +1981,6 @@
           ]
         },
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -2005,7 +1998,7 @@
             "url": "https://qdrant.tech/documentation",
             "domain": "qdrant.tech",
             "quality_score": 0.7729,
-            "retrieved_at": "2026-10-29T16:34:01.496647Z",
+            "retrieved_at": "2026-10-30T04:14:37.619186Z",
             "provenance": "fixture"
           },
           {
@@ -2014,7 +2007,7 @@
             "url": "https://milvus.io/docs",
             "domain": "milvus.io",
             "quality_score": 0.74,
-            "retrieved_at": "2026-10-29T16:34:01.497766Z",
+            "retrieved_at": "2026-10-30T04:14:37.620554Z",
             "provenance": "fixture"
           },
           {
@@ -2023,7 +2016,7 @@
             "url": "https://docs.weaviate.io/weaviate",
             "domain": "docs.weaviate.io",
             "quality_score": 0.7371,
-            "retrieved_at": "2026-10-29T16:34:01.498936Z",
+            "retrieved_at": "2026-10-30T04:14:37.622046Z",
             "provenance": "fixture"
           }
         ],
@@ -2041,12 +2034,12 @@
           }
         },
         "meta": {
-          "trace_id": "5724f1a6823c4fe1b111bcfe400169c9",
+          "trace_id": "ff658829dabf42ab994d2d17f78d138a",
           "mode": "mock",
-          "latency_s": 0.0452,
+          "latency_s": 0.0449,
           "tool_calls": 9,
-          "tokens": 1993,
-          "token_upper_bound_reserved": 21255,
+          "tokens": 2152,
+          "token_upper_bound_reserved": 2152,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -2059,14 +2052,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.000469,
-            "plan": 0.004459,
-            "execute": 0.011286,
-            "filter": 0.016508,
-            "synthesize": 0.005044,
-            "verify": 0.001254,
-            "judge": 0.00208,
-            "confidence": 0.000853
+            "understand": 0.000416,
+            "plan": 0.005614,
+            "execute": 0.014645,
+            "filter": 0.005357,
+            "synthesize": 0.008489,
+            "verify": 0.001467,
+            "judge": 0.003921,
+            "confidence": 0.000938
           }
         }
       }
@@ -2094,7 +2087,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0041,
+        "latency_s": 0.0053,
         "tokens": 102,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -2129,12 +2122,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "4b12b9380902441c86ab91520480c924",
+          "trace_id": "344877b0d14a491888491ebaa2944cc3",
           "mode": "mock",
-          "latency_s": 0.0041,
+          "latency_s": 0.0053,
           "tool_calls": 0,
           "tokens": 102,
-          "token_upper_bound_reserved": 5786,
+          "token_upper_bound_reserved": 102,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -2174,8 +2167,8 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0375,
-        "tokens": 298,
+        "latency_s": 0.0339,
+        "tokens": 330,
         "est_cost_usd": 0.0,
         "tool_calls": 8,
         "tool_failure_rate": 1.0,
@@ -2219,12 +2212,12 @@
           }
         },
         "meta": {
-          "trace_id": "2b68333efde142f899e54d9ff1c71ca4",
+          "trace_id": "9f2c51d7cc7f415081c3b77ee9e1b630",
           "mode": "mock",
-          "latency_s": 0.0375,
+          "latency_s": 0.0339,
           "tool_calls": 8,
-          "tokens": 298,
-          "token_upper_bound_reserved": 5432,
+          "tokens": 330,
+          "token_upper_bound_reserved": 330,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -2237,11 +2230,11 @@
           "partial": false,
           "status": "insufficient_evidence",
           "stage_latency_s": {
-            "understand": 0.000464,
-            "plan": 0.005539,
-            "execute": 0.023398,
-            "filter": 0.0031019999999999997,
-            "confidence": 0.001063
+            "understand": 0.000319,
+            "plan": 0.009346,
+            "execute": 0.018424,
+            "filter": 0.0017950000000000002,
+            "confidence": 0.000841
           }
         }
       }
@@ -2270,7 +2263,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0075,
+        "latency_s": 0.0055,
         "tokens": 103,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -2306,12 +2299,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "957b8d27fa6b40348043195432448458",
+          "trace_id": "627e845144f749b5b7f2ab4de36135fe",
           "mode": "mock",
-          "latency_s": 0.0075,
+          "latency_s": 0.0055,
           "tool_calls": 0,
           "tokens": 103,
-          "token_upper_bound_reserved": 5788,
+          "token_upper_bound_reserved": 103,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -2350,7 +2343,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0207,
+        "latency_s": 0.0035,
         "tokens": 0,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -2388,9 +2381,9 @@
           }
         },
         "meta": {
-          "trace_id": "804c19d3deea4e129cef06239899c466",
+          "trace_id": "073b10073dd3429490e32bed059165b3",
           "mode": "mock",
-          "latency_s": 0.0207,
+          "latency_s": 0.0035,
           "tool_calls": 0,
           "tokens": 0,
           "token_upper_bound_reserved": 0,
@@ -2404,8 +2397,8 @@
           "partial": false,
           "status": "refused",
           "stage_latency_s": {
-            "understand": 0.001552,
-            "confidence": 0.016765
+            "understand": 0.000408,
+            "confidence": 0.001413
           }
         }
       }
@@ -2463,7 +2456,7 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "95308a8a622740af9a7b561b936b2efc",
+          "trace_id": "7d9935c36e59434f8644b30215a4f61d",
           "mode": "mock",
           "latency_s": 0.0001,
           "tool_calls": 0,
@@ -2505,8 +2498,8 @@
         "avg_source_quality": 0.7333333333333334,
         "verified_claim_fraction": 1.0,
         "judge_score": 0.82,
-        "latency_s": 0.2717,
-        "tokens": 2010,
+        "latency_s": 0.0442,
+        "tokens": 2174,
         "est_cost_usd": 0.0,
         "tool_calls": 5,
         "tool_failure_rate": 0.6,
@@ -2581,7 +2574,6 @@
           ]
         },
         "assumptions": [
-          "Authored mock corpus; observations are not independently researched facts.",
           "Offline fixture run; these are authored examples, not current web research."
         ],
         "limitations": [
@@ -2600,7 +2592,7 @@
             "url": "https://docs.weaviate.io/weaviate",
             "domain": "docs.weaviate.io",
             "quality_score": 0.7871,
-            "retrieved_at": "2026-10-29T16:34:06.288157Z",
+            "retrieved_at": "2026-10-30T04:14:39.826041Z",
             "provenance": "fixture"
           },
           {
@@ -2609,7 +2601,7 @@
             "url": "https://milvus.io/docs",
             "domain": "milvus.io",
             "quality_score": 0.74,
-            "retrieved_at": "2026-10-29T16:34:06.288164Z",
+            "retrieved_at": "2026-10-30T04:14:39.826048Z",
             "provenance": "fixture"
           },
           {
@@ -2618,7 +2610,7 @@
             "url": "https://qdrant.tech/documentation",
             "domain": "qdrant.tech",
             "quality_score": 0.6729,
-            "retrieved_at": "2026-10-29T16:34:06.288140Z",
+            "retrieved_at": "2026-10-30T04:14:39.826029Z",
             "provenance": "fixture"
           }
         ],
@@ -2636,12 +2628,12 @@
           }
         },
         "meta": {
-          "trace_id": "39a23690a9e7453a84a388b4f57ae578",
+          "trace_id": "4d7071f1757f446f85b99042f5ed8a21",
           "mode": "mock",
-          "latency_s": 0.2717,
+          "latency_s": 0.0442,
           "tool_calls": 5,
-          "tokens": 2010,
-          "token_upper_bound_reserved": 21277,
+          "tokens": 2174,
+          "token_upper_bound_reserved": 2174,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"
@@ -2654,14 +2646,14 @@
           "partial": false,
           "status": "completed",
           "stage_latency_s": {
-            "understand": 0.014061,
-            "plan": 0.012249,
-            "execute": 0.013797,
-            "filter": 0.192677,
-            "synthesize": 0.02133,
-            "verify": 0.003029,
-            "judge": 0.005127,
-            "confidence": 0.001153
+            "understand": 0.000465,
+            "plan": 0.005727,
+            "execute": 0.01098,
+            "filter": 0.004688,
+            "synthesize": 0.010566,
+            "verify": 0.001309,
+            "judge": 0.005642,
+            "confidence": 0.000874
           }
         }
       }
@@ -2689,7 +2681,7 @@
         "avg_source_quality": 0.0,
         "verified_claim_fraction": 0.0,
         "judge_score": null,
-        "latency_s": 0.0166,
+        "latency_s": 0.0059,
         "tokens": 105,
         "est_cost_usd": 0.0,
         "tool_calls": 0,
@@ -2724,12 +2716,12 @@
           "factors": {}
         },
         "meta": {
-          "trace_id": "6e26eaa291a745668c7bf46c110b1c8a",
+          "trace_id": "41d936be7ad54deaaaad7e387336c903",
           "mode": "mock",
-          "latency_s": 0.0166,
+          "latency_s": 0.0059,
           "tool_calls": 0,
           "tokens": 105,
-          "token_upper_bound_reserved": 5797,
+          "token_upper_bound_reserved": 105,
           "est_cost_usd": 0.0,
           "models": [
             "mock-extractive-v1"

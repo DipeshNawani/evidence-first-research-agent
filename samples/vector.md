@@ -25,13 +25,12 @@ Low confidence; provisional evidence only. Weaviate supports hybrid keyword and 
 
 ## Sources
 
-- [S1] [Weaviate](https://docs.weaviate.io/weaviate) - quality 0.84; fixture; retrieved 2026-10-29T16:33:52.614813+00:00
-- [S2] [Milvus](https://milvus.io/docs) - quality 0.74; fixture; retrieved 2026-10-29T16:33:52.616568+00:00
-- [S3] [Qdrant](https://qdrant.tech/documentation) - quality 0.67; fixture; retrieved 2026-10-29T16:33:52.617681+00:00
+- [S1] [Weaviate](https://docs.weaviate.io/weaviate) - quality 0.84; fixture; retrieved 2026-10-30T04:14:32.122868+00:00
+- [S2] [Milvus](https://milvus.io/docs) - quality 0.74; fixture; retrieved 2026-10-30T04:14:32.124234+00:00
+- [S3] [Qdrant](https://qdrant.tech/documentation) - quality 0.67; fixture; retrieved 2026-10-30T04:14:32.125451+00:00
 
 ## Assumptions
 
-- Authored mock corpus; observations are not independently researched facts.
 - Offline fixture run; these are authored examples, not current web research.
 
 ## Limitations
@@ -45,6 +44,6 @@ Low confidence; provisional evidence only. Weaviate supports hybrid keyword and 
 
 ## Run summary
 
-Trace `35ced655c8d0472da254d40c26d7118b` · 0.120s · 5 tool attempts · 2000 reported tokens · estimated model cost $0.000000 · partial: False
+Trace `aaa4cb7529334ef583ee3080d6b6a456` · 0.037s · 5 tool attempts · 2166 reported tokens · estimated model cost $0.000000 · partial: False
 
-Stage latency: understand 0.002s, plan 0.009s, execute 0.018s, filter 0.069s, synthesize 0.008s, verify 0.002s, judge 0.006s, confidence 0.001s
+Stage latency: understand 0.001s, plan 0.006s, execute 0.011s, filter 0.004s, synthesize 0.006s, verify 0.001s, judge 0.003s, confidence 0.001s

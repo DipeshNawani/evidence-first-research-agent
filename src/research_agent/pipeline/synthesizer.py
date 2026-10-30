@@ -1,14 +1,7 @@
 from research_agent import prompts
 from research_agent.llm.gateway import Gateway
-from research_agent.safety.injection import untrusted_payload
+from research_agent.pipeline.context import citation_options, pack_context
 from research_agent.schemas import AnswerDraft, Evidence, Plan
-
-
-def evidence_payload(evidence: list[Evidence]) -> list[dict]:
-    return [
-        {"source": e.source.model_dump(mode="json"), "text": untrusted_payload(e.text)}
-        for e in evidence
-    ]
 
 
 async def synthesize(
@@ -17,19 +10,31 @@ async def synthesize(
     evidence: list[Evidence],
     gateway: Gateway,
     feedback: list[str] | None = None,
+    budget_fraction: float | None = None,
 ) -> AnswerDraft:
-    return await gateway.call(
+    payload, shortened = pack_context(
+        evidence,
+        gateway,
         "synthesize",
         prompts.SYNTHESIZE,
         {
             "question": question,
             "question_type": plan.question_type,
             "success_criteria": plan.success_criteria,
-            "evidence": evidence_payload(evidence),
             "feedback": feedback or [],
+            "citation_options": citation_options(question, evidence),
         },
         AnswerDraft,
+        fraction=budget_fraction
+        if budget_fraction is not None
+        else (0.65 if gateway.settings.judge_enabled else 1.0),
     )
+    answer = await gateway.call("synthesize", prompts.SYNTHESIZE, payload, AnswerDraft)
+    if shortened:
+        answer.limitations.append(
+            "Evidence context was shortened to fit the model token budget; some source detail was omitted."
+        )
+    return answer
 
 
 def extractive_fallback(evidence: list[Evidence]) -> AnswerDraft:

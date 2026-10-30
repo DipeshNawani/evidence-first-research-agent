@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
+from research_agent.prompts import PROMPT_VERSION
 from research_agent.schemas import TraceEvent
 
 
@@ -28,7 +29,7 @@ def redact(value: Any) -> Any:
             r"(?i)\b(api[_-]?key|password|token|secret)\s*[:=]\s*[^\s,;&]+", r"\1=[SECRET]", value
         )
         value = re.sub(r"\b[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}\b", "[EMAIL]", value)
-        value = re.sub(r"\b(?:sk-|tvly-|sk-ant-)[A-Za-z0-9_-]+", "[SECRET]", value)
+        value = re.sub(r"\b(?:sk-|tvly-|sk-ant-|nvapi-)[A-Za-z0-9_-]+", "[SECRET]", value)
         value = re.sub(r"(?i)(bearer\s+)[^\s]+", r"\1[SECRET]", value)
         return re.sub(
             r"(?i)([?&](?:token|key|secret|signature|password)=)[^&#\s]+", r"\1[SECRET]", value
@@ -44,7 +45,7 @@ class Trace:
         self.path = directory / f"{self.id}.jsonl"
         self.events: list[TraceEvent] = []
         self.stage_latencies: dict[str, float] = {}
-        self.emit("run_start", "run", mode=mode, prompt_version="2026-10-29.v1")
+        self.emit("run_start", "run", mode=mode, prompt_version=PROMPT_VERSION)
 
     def emit(self, event: str, stage: str, **data: Any) -> None:
         item = TraceEvent(trace_id=self.id, event=event, stage=stage, data=redact(data))

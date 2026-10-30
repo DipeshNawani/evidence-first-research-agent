@@ -15,19 +15,24 @@ class Settings(BaseSettings):
         # boundary explicit for static checkers. Pydantic still validates every field.
         super().__init__(**values)
 
-    llm_provider: Literal["mock", "openai", "anthropic"] = "mock"
+    llm_provider: Literal["mock", "openai", "anthropic", "nvidia"] = "mock"
     openai_api_key: SecretStr = SecretStr("")
     anthropic_api_key: SecretStr = SecretStr("")
+    nvidia_api_key: SecretStr = SecretStr("")
     tavily_api_key: SecretStr = SecretStr("")
     openai_model: str = "gpt-4o-mini"
     openai_judge_model: str = "gpt-4o-mini"
     anthropic_model: str = "claude-sonnet-4-5"
     anthropic_judge_model: str = "claude-haiku-4-5"
+    nvidia_model: str = "nvidia/nemotron-3-ultra-550b-a55b"
+    nvidia_judge_model: str = "nvidia/nemotron-3-ultra-550b-a55b"
     judge_enabled: bool = True
     judge_threshold: float = Field(0.72, ge=0, le=1)
     low_confidence_threshold: float = Field(0.55, ge=0, le=1)
     source_threshold: float = Field(0.38, ge=0, le=1)
     max_sub_questions: int = Field(3, ge=1, le=5)
+    max_search_queries_per_step: int = Field(1, ge=1, le=2)
+    synthesis_reserve_seconds: float = Field(35, ge=0)
     max_rounds: int = Field(2, ge=1, le=2)
     max_tool_calls: int = Field(16, ge=1, le=100)
     max_pages: int = Field(6, ge=0, le=30)
@@ -46,9 +51,39 @@ class Settings(BaseSettings):
     max_redirects: int = Field(3, ge=0, le=5)
     evidence_chars: int = Field(3500, ge=100, le=15000)
     max_evidence: int = Field(8, ge=1, le=20)
+    brief_max_pages: int = Field(2, ge=1, le=6)
+    brief_max_evidence: int = Field(3, ge=1, le=8)
+    trusted_source_domains: list[str] = [
+        "icc-cricket.com",
+        "bcci.tv",
+        "espncricinfo.com",
+        "cricinfo.com",
+        "olympics.com",
+        "wikipedia.org",
+        "github.com",
+        "arxiv.org",
+        "openai.com",
+        "nvidia.com",
+        "anthropic.com",
+        "qdrant.tech",
+        "weaviate.io",
+        "milvus.io",
+    ]
+    weak_source_domains: list[str] = [
+        "facebook.com",
+        "instagram.com",
+        "tiktok.com",
+        "scribd.com",
+        "youtube.com",
+        "quora.com",
+        "reddit.com",
+    ]
     llm_output_tokens: int = Field(2500, ge=100)
+    judge_output_tokens: int = Field(600, ge=100, le=2500)
     cache_ttl_seconds: float = Field(3600, ge=0)
     cache_max_entries: int = Field(512, ge=1)
+    result_ttl_seconds: float = Field(3600, gt=0)
+    max_saved_results: int = Field(64, ge=1, le=256)
     trace_dir: Path = Path("traces")
     input_usd_per_million: float | None = Field(None, ge=0)
     output_usd_per_million: float | None = Field(None, ge=0)
@@ -57,10 +92,14 @@ class Settings(BaseSettings):
 
     @property
     def model(self) -> str:
+        if self.llm_provider == "nvidia":
+            return self.nvidia_model
         return self.anthropic_model if self.llm_provider == "anthropic" else self.openai_model
 
     @property
     def judge_model(self) -> str:
+        if self.llm_provider == "nvidia":
+            return self.nvidia_judge_model
         return (
             self.anthropic_judge_model
             if self.llm_provider == "anthropic"

@@ -1,0 +1,229 @@
+{
+  "short_answer": "Source [S2] (www.digitalapplied.com) reports: Four distinct memory architectures have emerged for AI agents: flat vector stores, episodic page-in/page-out systems, knowledge-graph-backed stores, and hybrid combinations. Source [S2] (www.digitalapplied.com) reports: Most agent memory failures manifest as hallucinations but are actually retrieval failures determined by memory architecture choice. Source [S3] (finance.yahoo.com) reports: Zendesk deployed an autonomous support agent targeting 80% issue resolution without human intervention, supplemented by co-pilot, admin, voice, and analytics agents. Source [S5] (stonly.com) reports: Decagon's production platform uses Agent Operating Procedures (AOPs) with multi-channel support across chat, email, and voice, serving enterprise customers including Notion, Duolingo, Chime, and Rippling. Source [S1] (www.confident-ai.com) reports: Multi-turn evaluation reveals memory failures like \"going in circles\" and \"forgetting what I just said\" that single-turn evals miss, requiring regression evals for coherence drops after context compression or handoffs.",
+  "key_findings": [
+    {
+      "claim": "Source [S2] (www.digitalapplied.com) reports: Four distinct memory architectures have emerged for AI agents: flat vector stores, episodic page-in/page-out systems, knowledge-graph-backed stores, and hybrid combinations.",
+      "source_ids": [
+        "S2"
+      ],
+      "supporting_quote": "In the last twelve months, four distinct memory architectures have settled out of the noise: flat vector stores (Mem0, Zep), episodic page-in/page-out systems (Letta, MemGPT), knowledge-graph-backed stores (graph-RAG on Neo4j or TypeDB), and hybrid combinations that stitch two or three together.",
+      "verified": true
+    },
+    {
+      "claim": "Source [S2] (www.digitalapplied.com) reports: Most agent memory failures manifest as hallucinations but are actually retrieval failures determined by memory architecture choice.",
+      "source_ids": [
+        "S2"
+      ],
+      "supporting_quote": "Most agent memory failures look like hallucinations but they're actually retrieval failures. The architecture you pick for memory determines what your agent can and can't remember",
+      "verified": true
+    },
+    {
+      "claim": "Source [S3] (finance.yahoo.com) reports: Zendesk deployed an autonomous support agent targeting 80% issue resolution without human intervention, supplemented by co-pilot, admin, voice, and analytics agents.",
+      "source_ids": [
+        "S3"
+      ],
+      "supporting_quote": "The center of the new features is an autonomous support agent that Zendesk believes will solve 80% of support issues without human intervention.",
+      "verified": true
+    },
+    {
+      "claim": "Source [S5] (stonly.com) reports: Decagon's production platform uses Agent Operating Procedures (AOPs) with multi-channel support across chat, email, and voice, serving enterprise customers including Notion, Duolingo, Chime, and Rippling.",
+      "source_ids": [
+        "S5"
+      ],
+      "supporting_quote": "Its Agent Operating Procedures (AOPs), multi-channel support across chat, email, and voice, and enterprise customer base (Notion, Duolingo, Chime, Rippling) make it a credible choice for large teams looking to automate support conversations.",
+      "verified": true
+    },
+    {
+      "claim": "Source [S1] (www.confident-ai.com) reports: Multi-turn evaluation reveals memory failures like \"going in circles\" and \"forgetting what I just said\" that single-turn evals miss, requiring regression evals for coherence drops after context compression or handoffs.",
+      "source_ids": [
+        "S1"
+      ],
+      "supporting_quote": "every week, their support inbox filled up with complaints about the bot \"going in circles\" and \"forgetting what I just said.\"",
+      "verified": true
+    },
+    {
+      "claim": "Source [S7] (ai-workplace-tools.contentwave.net) reports: Enterprise retrieval approaches include BM25 sparse search, dense vector retrieval, hybrid sparse+dense pipelines, and LLM-native retrieval patterns balancing accuracy, latency, cost, and governance.",
+      "source_ids": [
+        "S7"
+      ],
+      "supporting_quote": "The market now offers multiple mature approaches\u2014traditional sparse search (BM25), dense vector retrieval with specialized databases, hybrid sparse+dense pipelines, and growing \u201cLLM-native retrieval\u201d patterns",
+      "verified": true
+    }
+  ],
+  "comparison_table": {
+    "columns": [
+      "Supported observation"
+    ],
+    "rows": [
+      {
+        "item": "Agent Memory Architectures: Vector vs Graph vs Episodic",
+        "cells": [
+          "Source [S2] (www.digitalapplied.com) reports: Four distinct memory architectures have emerged for AI agents: flat vector stores, episodic page-in/page-out systems, knowledge-graph-backed stores, and hybrid combinations."
+        ],
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "item": "Agent Memory Architectures: Vector vs Graph vs Episodic",
+        "cells": [
+          "Source [S2] (www.digitalapplied.com) reports: Most agent memory failures manifest as hallucinations but are actually retrieval failures determined by memory architecture choice."
+        ],
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "item": "Zendesk says its new AI agent can solve 80% of support issues",
+        "cells": [
+          "Source [S3] (finance.yahoo.com) reports: Zendesk deployed an autonomous support agent targeting 80% issue resolution without human intervention, supplemented by co-pilot, admin, voice, and analytics agents."
+        ],
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "item": "6 Best Decagon Alternatives Compared for 2026",
+        "cells": [
+          "Source [S5] (stonly.com) reports: Decagon's production platform uses Agent Operating Procedures (AOPs) with multi-channel support across chat, email, and voice, serving enterprise customers including Notion, Duolingo, Chime, and Rippling."
+        ],
+        "source_ids": [
+          "S5"
+        ]
+      },
+      {
+        "item": "Multi-Turn LLM Evaluation in 2026: What You Need to Know - Confident AI",
+        "cells": [
+          "Source [S1] (www.confident-ai.com) reports: Multi-turn evaluation reveals memory failures like \"going in circles\" and \"forgetting what I just said\" that single-turn evals miss, requiring regression evals for coherence drops after context compression or handoffs."
+        ],
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "item": "Hybrid Retrieval: Cost, Latency & Accuracy 2026 | AI Workplace Tools",
+        "cells": [
+          "Source [S7] (ai-workplace-tools.contentwave.net) reports: Enterprise retrieval approaches include BM25 sparse search, dense vector retrieval, hybrid sparse+dense pipelines, and LLM-native retrieval patterns balancing accuracy, latency, cost, and governance."
+        ],
+        "source_ids": [
+          "S7"
+        ]
+      }
+    ]
+  },
+  "assumptions": [
+    "The user is evaluating architectural options for a new or existing AI support agent.",
+    "Focus is on LLM-based agents (not rule-based bots) deployed in 2024-2025.",
+    "English-language technical sources are sufficient."
+  ],
+  "limitations": [
+    "Only four memory architectures identified in evidence (not five as requested)",
+    "Limited technical detail on specific memory implementations in Zendesk/Decagon cases",
+    "No benchmark data or quantitative comparisons provided in sources",
+    "S7/S8 appear to be duplicate content from different domains",
+    "Evidence context was shortened to fit the model token budget; some source detail was omitted.",
+    "Removed 1 citation(s) whose source did not contain the supporting quote.",
+    "Fetched evidence was truncated to the configured character budget; later context may be missing.",
+    "Some sources were unavailable as full pages; search snippets were used where sufficient.",
+    "Dropped 7 sources: evidence_budget, injection_quarantined, low_quality_or_relevance.",
+    "1 sub-question(s) lack two independent candidate domains.",
+    "Budget exhausted: this is a partial best-effort result."
+  ],
+  "suggested_next_steps": [
+    "Research specific memory configurations used in Zendesk's autonomous agent",
+    "Investigate Decagon's AOP memory implementation details",
+    "Find benchmark comparisons across the four architectures",
+    "Explore fifth memory approach (e.g., parametric memory, semantic memory) to complete taxonomy"
+  ],
+  "user_question": "Compare approaches to adding memory in an AI support agent.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Multi-Turn LLM Evaluation in 2026: What You Need to Know - Confident AI",
+      "url": "https://www.confident-ai.com/blog/multi-turn-llm-evaluation-in-2026",
+      "domain": "www.confident-ai.com",
+      "quality_score": 0.675,
+      "retrieved_at": "2026-10-30T04:09:29.148248Z",
+      "provenance": "page"
+    },
+    {
+      "id": "S2",
+      "title": "Agent Memory Architectures: Vector vs Graph vs Episodic",
+      "url": "https://www.digitalapplied.com/blog/agent-memory-architectures-vector-graph-episodic",
+      "domain": "www.digitalapplied.com",
+      "quality_score": 0.675,
+      "retrieved_at": "2026-10-30T04:09:28.130059Z",
+      "provenance": "page"
+    },
+    {
+      "id": "S3",
+      "title": "Zendesk says its new AI agent can solve 80% of support issues",
+      "url": "https://finance.yahoo.com/news/zendesk-says-ai-agent-solve-170025509.html",
+      "domain": "finance.yahoo.com",
+      "quality_score": 0.605,
+      "retrieved_at": "2026-10-30T04:09:28.871416Z",
+      "provenance": "page"
+    },
+    {
+      "id": "S5",
+      "title": "6 Best Decagon Alternatives Compared for 2026",
+      "url": "https://stonly.com/blog/decagon-alternatives",
+      "domain": "stonly.com",
+      "quality_score": 0.605,
+      "retrieved_at": "2026-10-30T04:09:29.379004Z",
+      "provenance": "page"
+    },
+    {
+      "id": "S7",
+      "title": "Hybrid Retrieval: Cost, Latency & Accuracy 2026 | AI Workplace Tools",
+      "url": "https://ai-workplace-tools.contentwave.net/article/hybrid-retrieval-in-enterprise-llms-cost-latency-accuracy-tradeoffs",
+      "domain": "ai-workplace-tools.contentwave.net",
+      "quality_score": 0.535,
+      "retrieved_at": "2026-10-30T04:09:37.337422Z",
+      "provenance": "snippet"
+    }
+  ],
+  "confidence": {
+    "level": "high",
+    "score": 0.8046,
+    "factors": {
+      "independent_sources": 1.0,
+      "quality": 0.619,
+      "grounding": 1.0,
+      "agreement_proxy": 0.5,
+      "judge": 0.7175,
+      "tool_health": 0.9,
+      "gap_coverage": 0.5
+    }
+  },
+  "meta": {
+    "trace_id": "c9e9ef716a7f473c80e7fabdfb0a3038",
+    "mode": "live",
+    "latency_s": 100.0211,
+    "tool_calls": 10,
+    "tokens": 12203,
+    "token_upper_bound_reserved": 24693,
+    "est_cost_usd": null,
+    "models": [
+      "nvidia/nemotron-3-ultra-550b-a55b"
+    ],
+    "plan_summary": "What are the main architectural approaches for adding memory to an AI support agent, and how do they compare in terms of implementation complexity, retrieval accuracy, and operational trade-offs?",
+    "dropped_sources_count": 7,
+    "grounding_rate": 1.0,
+    "judge_score": 0.7175,
+    "tool_failure_rate": 0.1,
+    "partial": true,
+    "status": "completed",
+    "stage_latency_s": {
+      "understand": 0.000464,
+      "plan": 25.671989,
+      "execute": 12.309377999999999,
+      "filter": 0.088393,
+      "synthesize": 25.298236,
+      "verify": 0.003111,
+      "judge": 16.656362,
+      "revision": 19.982523,
+      "confidence": 0.000909
+    }
+  }
+}

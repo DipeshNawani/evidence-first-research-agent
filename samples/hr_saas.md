@@ -21,15 +21,14 @@ Low confidence; provisional evidence only. Darwinbox is positioned as an enterpr
 
 ## Sources
 
-- [S1] [Darwinbox](https://darwinbox.com/) - quality 0.67; fixture; retrieved 2026-10-29T16:33:54.392576+00:00
-- [S2] [Keka](https://www.keka.com/) - quality 0.64; fixture; retrieved 2026-10-29T16:33:54.394032+00:00
-- [S3] [HROne](https://hrone.cloud/) - quality 0.64; fixture; retrieved 2026-10-29T16:33:54.395611+00:00
-- [S4] [Zimyo](https://www.zimyo.com/) - quality 0.64; fixture; retrieved 2026-10-29T16:33:54.396888+00:00
-- [S5] [greytHR](https://www.greythr.com/) - quality 0.59; fixture; retrieved 2026-10-29T16:33:54.398198+00:00
+- [S1] [Darwinbox](https://darwinbox.com/) - quality 0.67; fixture; retrieved 2026-10-30T04:14:32.805108+00:00
+- [S2] [Keka](https://www.keka.com/) - quality 0.64; fixture; retrieved 2026-10-30T04:14:32.806380+00:00
+- [S3] [HROne](https://hrone.cloud/) - quality 0.64; fixture; retrieved 2026-10-30T04:14:32.807529+00:00
+- [S4] [Zimyo](https://www.zimyo.com/) - quality 0.64; fixture; retrieved 2026-10-30T04:14:32.808735+00:00
+- [S5] [greytHR](https://www.greythr.com/) - quality 0.59; fixture; retrieved 2026-10-30T04:14:32.810564+00:00
 
 ## Assumptions
 
-- Authored mock corpus; observations are not independently researched facts.
 - Offline fixture run; these are authored examples, not current web research.
 
 ## Limitations
@@ -43,6 +42,6 @@ Low confidence; provisional evidence only. Darwinbox is positioned as an enterpr
 
 ## Run summary
 
-Trace `e9147754ca1141f8ab078d7ba6e1b50c` · 0.140s · 7 tool attempts · 2526 reported tokens · estimated model cost $0.000000 · partial: False
+Trace `b256aee83771444396f1bf5ad5846e6f` · 0.064s · 7 tool attempts · 2740 reported tokens · estimated model cost $0.000000 · partial: False
 
-Stage latency: understand 0.000s, plan 0.006s, execute 0.017s, filter 0.102s, synthesize 0.006s, verify 0.002s, judge 0.003s, confidence 0.001s
+Stage latency: understand 0.000s, plan 0.020s, execute 0.015s, filter 0.005s, synthesize 0.011s, verify 0.002s, judge 0.005s, confidence 0.001s
