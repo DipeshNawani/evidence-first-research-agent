@@ -1,0 +1,8 @@
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.209064Z","event":"run_start","stage":"run","data":{"mode":"live","prompt_version":"2026-10-30.v4"}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.210729Z","event":"stage_start","stage":"understand","data":{}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.211134Z","event":"stage_end","stage":"understand","data":{"latency_s":0.000382}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.211622Z","event":"early_exit","stage":"understand","data":{"status":"needs_clarification"}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.212024Z","event":"stage_start","stage":"confidence","data":{}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.213134Z","event":"confidence","stage":"confidence","data":{"level":"low","score":0.19,"factors":{"independent_sources":0.0,"quality":0.0,"grounding":0.0,"agreement_proxy":0.0,"judge":0.4,"tool_health":1.0,"gap_coverage":0.5}}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.214007Z","event":"stage_end","stage":"confidence","data":{"latency_s":0.001825}}
+{"trace_id":"2c56ea1e737a43c9bf43ac5e1ea01fd3","timestamp":"2026-10-30T05:13:36.215022Z","event":"run_end","stage":"run","data":{"status":"needs_clarification","latency_s":0.0041,"tokens":0,"tool_calls":0,"est_cost_usd":null}}

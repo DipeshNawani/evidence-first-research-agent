@@ -9,6 +9,8 @@ htmlcov/
 .env.*
 !.env.example
 traces/
+!eval/results/live/traces/
+!eval/results/live/traces/*.jsonl
 .cache/
 dist/
 tmp/

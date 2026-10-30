@@ -21,8 +21,11 @@ Executed NVIDIA integration records are preserved under [the initial smoke check
     agent = [row for row in data["rows"] if row["system"] == "agent"]
     baseline = [row for row in data["rows"] if row["system"] == "baseline"]
     substantive = [row for row in agent if row["metrics"]["source_count"] > 0]
+    current_trace_ids = {row["answer"]["meta"]["trace_id"] for row in data["rows"]}
     providers: dict[str, int] = {}
     for trace_path in sorted((path.parent / "traces").glob("*.jsonl")):
+        if trace_path.stem not in current_trace_ids:
+            continue
         for line in trace_path.read_text(encoding="utf-8").splitlines():
             event = json.loads(line)
             fields = event.get("data", {})

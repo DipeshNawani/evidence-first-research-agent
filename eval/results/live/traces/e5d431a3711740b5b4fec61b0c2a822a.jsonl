@@ -1,0 +1,8 @@
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.158167Z","event":"run_start","stage":"run","data":{"mode":"live","prompt_version":"2026-10-30.v4"}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.181396Z","event":"stage_start","stage":"understand","data":{}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.187577Z","event":"stage_end","stage":"understand","data":{"latency_s":0.006151}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.188627Z","event":"early_exit","stage":"understand","data":{"status":"refused"}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.191154Z","event":"stage_start","stage":"confidence","data":{}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.192378Z","event":"confidence","stage":"confidence","data":{"level":"low","score":0.19,"factors":{"independent_sources":0.0,"quality":0.0,"grounding":0.0,"agreement_proxy":0.0,"judge":0.4,"tool_health":1.0,"gap_coverage":0.5}}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.192845Z","event":"stage_end","stage":"confidence","data":{"latency_s":0.001672}}
+{"trace_id":"e5d431a3711740b5b4fec61b0c2a822a","timestamp":"2026-10-30T05:13:37.193723Z","event":"run_end","stage":"run","data":{"status":"refused","latency_s":0.0122,"tokens":0,"tool_calls":0,"est_cost_usd":null}}
